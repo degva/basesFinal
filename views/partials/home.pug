@@ -1,0 +1,66 @@
+div.mdl-grid
+
+	div.main-card.mdl-cell.mdl-cell--12-col.mdl-grid
+		header.logo.mdl-cell.mdl-cell--3-col
+		div.mdl-card.mdl-cell.mdl-cell--9-col
+			div.mdl-card__title
+				h2.mdl-card__title-text Company Name - Statistics
+			div.mdl-card__supporting-text
+				ul
+					li
+						i.fa.fa-book 34 courses
+					li
+						i.fa.fa-user 34 enrolled
+					li
+						i.fa.fa-pencil 34 authors
+					li
+						i.fa.fa-graduation-cap 43 graduates
+
+	div.mdl-card.mdl-cell.mdl-cell--12-col
+		div.mdl-tabs.mdl-js-tabs.mdl-js-ripple-effect
+			// TAB BAR
+			div.mdl-tabs__tab-bar
+				a.mdl-tabs__tab.is-active(href="#courses-panel") Courses
+				a.mdl-tabs__tab(href="#authors-panel") Authors
+				a.mdl-tabs__tab(href="#students-panel") Students
+			// - COURSE PANEL
+			// Is there anything to be shown in the courses list?
+			div.mdl-tabs__panel.is-active#courses-panel
+				// it should be ul.mdl-list, but it would be padding-less
+				ul
+					li.mdl-list__item 
+						span.mdl-list__item-primary-content Course 1
+					li.mdl-list__item 
+						span.mdl-list__item-primary-content Course 2
+					li.mdl-list__item 
+						span.mdl-list__item-primary-content Course 3
+			// - AUTHORS PANEL
+			// TODO: authors should be shonw in rows of 3, 2 or 1 (desktop, tablet, phone)
+			div.mdl-tabs__panel#authors-panel
+				ul
+					li.mdl-list__item.mdl-list__item--two-line
+						span.mdl-list__item-primary-content
+							i.fa.fa-user.fa-lg
+							span This author
+							span.mdl-list__item-sub-title In 3 courses - 9 students in charge
+						span.mdl-list__item-secondary-content
+							span.mdl-list__item-secondary-info Rate
+							div.starring-display
+								i.fa.fa-star
+								i.fa.fa-star
+								i.fa.fa-star-o
+								i.fa.fa-star-o
+								i.fa.fa-star-o
+			// STUDENTS PANEL
+			// TODO: students should be shown in rows of 3, 2 or 1
+			div.mdl-tabs__panel#students-panel
+				ul
+					li.mdl-list__item.mdl-list__item--two-line
+						span.mdl-list__item-primary-content
+							i.fa.fa-user.fa-lg
+							span This Student
+							span.mdl-list__item-sub-title In 3 courses - 9 students in charge
+						span.mdl-list__item-secondary-content
+							i.fa.fa-envelope-o
+							i.fa.fa-phone
+			// STUDENTS PANEL

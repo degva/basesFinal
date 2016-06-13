@@ -1,0 +1,36 @@
+$base-color: #333333
+$fore-color: #dddddd
+$color1: #222
+$color2: #444
+$color3: #666
+$color4: #888
+$color5: #Aaa
+$color5: #Ccc
+$color5: #DDD
+
+$font-stack: Verdana, Arial, sans-serif
+
+body
+  font: 14px $font-stack
+  color: $base-color
+
+a
+  color: $color1
+
+md-sidenav
+  width: 65px
+  padding: 5px
+  height: 100%
+  color: $color5
+  background-color: $color4
+
+md-content
+  background-color: $color5
+  padding: 5px
+  height: 100%
+
+img.logo
+  border-radius: 50%
+
+ul
+  list-style-type: none

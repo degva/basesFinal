@@ -1,0 +1,125 @@
+* {
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif; }
+
+a {
+  color: #222; }
+
+main {
+  background-color: #f3f3f3; }
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
+.center-row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center; }
+
+ul {
+  list-style: none; }
+
+.mdl-layout__drawer {
+  width: calc(2px + 55px) !important; }
+
+.mdl-layout--fixed-drawer > .mdl-layout__content {
+  margin-left: 55px; }
+  @media screen and (max-width: 1024px) {
+    .mdl-layout--fixed-drawer > .mdl-layout__content {
+      margin-left: 0 !important; } }
+
+.mdl-layout--fixed-drawer.is-upgraded:not(.is-small-screen) > .mdl-layout__header {
+  margin-left: 55px;
+  width: calc(100% - 55px); }
+
+.mdl-layout__drawer .mdl-navigation .mdl-navigation__link {
+  padding: 0px 0px; }
+
+.mdl-button {
+  min-width: 55px; }
+
+a.mdl-button {
+  font-size: 12px; }
+
+.fa-bullet {
+  font-size: 9px !important;
+  padding-right: 15px; }
+
+.title {
+  padding-left: 15px; }
+
+.courses-list .fa-button {
+  padding-left: 15px; }
+
+.mdl-list__item-primary-content span {
+  padding-left: 25px; }
+
+.mdl-card {
+  border: 1px solid #dddddd;
+  min-height: 100px; }
+
+.mdl-card__title > h2 {
+  font-size: 18px; }
+
+.mdl-list__item {
+  padding: 4px;
+  padding-right: 25px; }
+
+.main-card header {
+  margin-right: 0px; }
+.main-card div.mdl-card {
+  margin-left: 0px; }
+
+.logo {
+  background-image: url("http://placehold.it/350x350");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover; }
+
+.cc {
+  padding: 0px; }
+  .cc div {
+    padding: 8px; }
+
+.cc-nav {
+  margin: 0px;
+  margin-right: 16px;
+  background-color: #DDD;
+  border-right: 1px solid #Aaa; }
+  .cc-nav .cc-nav-separator {
+    height: 16px;
+    border-left: 1px dotted #666;
+    margin-left: 24px;
+    margin-top: -7px;
+    margin-bottom: -10px;
+    padding: 0px; }
+  .cc-nav .cc-nav-item {
+    margin-left: 12px; }
+    .cc-nav .cc-nav-item i {
+      font-size: 10px; }
+    .cc-nav .cc-nav-item span {
+      font-size: 15px;
+      padding-left: 20px; }
+
+.cc-content .mdl-textfield {
+  padding: 0px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  width: 100%; }
+.cc-content .cc-content-footer {
+  font-size: 12px; }
+  .cc-content .cc-content-footer span {
+    margin-left: 15px; }
+
+.cc-suggest {
+  margin: 0px;
+  margin-left: 16px;
+  background-color: #DDD;
+  border-left: 1px solid #Aaa; }
+
+.cc-suggest h2, .cc-nav h2 {
+  font-size: 12px; }
+
+/*# sourceMappingURL=style.css.map */

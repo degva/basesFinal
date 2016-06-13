@@ -1,0 +1,40 @@
+extends layout
+
+block content
+	div.mdl-layout__container
+
+		div.mdl-layout.mdl-js-layout.mdl-layout--fixed-header.mdl-layout--fixed-drawer.has-drawer
+			header.mdl-layout__header
+				div.mdl-layout__header-row
+					span.mdl-layout-title Dashboard
+					
+			div.mdl-layout__drawer
+				//span.mdl-layout-title Title my Friend
+				nav.mdl-navigation
+					a.mdl-navigation__link(href="#/")
+						button.mdl-button(aria-label="Overview")
+							i.fa.fa-eye.fa-lg
+					a.mdl-navigation__link(href="#/courses")
+						button.mdl-button(aria-label="Courses")
+							i.fa.fa-book.fa-lg
+					a.mdl-navigation__link(href="#/income")
+						button.mdl-button(aria-label="Incomes")
+							i.fa.fa-money.fa-lg
+					a.mdl-navigation__link(href="#/authors")
+						button.mdl-button(aria-label="Authors")
+							i.fa.fa-users.fa-lg
+					// this spacer is not working
+					div.mdl-layout-spacer
+					a.mdl-navigation__link(href="#/configure")
+						button.mdl-button(aria-label="Configure")
+							i.fa.fa-cog.fa-lg
+					//
+						a.mdl-navigation__link(href="#/user")
+							button.mdl-button(aria-label="User")
+								i.fa.fa-user.fa-lg
+					a.mdl-navigation__link(href="#/log-out")
+						button.mdl-button(aria-label="Log Out")
+							i.fa.fa-sign-out.fa-lg
+
+			main.mdl-layout__content(flex, layout="column")
+				ng-view

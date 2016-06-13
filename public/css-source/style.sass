@@ -1,0 +1,160 @@
+$background-color: #f3f3f3
+$border-color: #dddddd
+$base-color: #333333
+$fore-color: #dddddd
+$color1: #222
+$color2: #444
+$color3: #666
+$color4: #888
+$color5: #Aaa
+$color6: #Ccc
+$color7: #DDD
+
+$drawer-size: 55px
+
+*
+  font-family: "Roboto","Helvetica","Arial",sans-serif
+
+a
+  color: $color1
+
+// for the background color on the center
+main
+  background-color: $background-color
+
+.center
+  display: flex
+  align-items: center
+  justify-content: center
+
+.center-row
+  display: flex
+  flex-direction: row
+  align-items: flex-start
+  justify-content: center
+
+
+ul
+  list-style: none
+
+.mdl-layout__drawer
+  width: calc(2px + #{$drawer-size}) !important
+
+.mdl-layout--fixed-drawer>.mdl-layout__content
+  margin-left: $drawer-size
+  @media screen and (max-width: 1024px)
+    margin-left: 0 !important
+
+.mdl-layout--fixed-drawer.is-upgraded:not(.is-small-screen)>.mdl-layout__header
+  margin-left: $drawer-size
+  width: calc(100% - #{$drawer-size})
+
+.mdl-layout__drawer .mdl-navigation .mdl-navigation__link
+  padding: 0px 0px
+
+// for the button
+.mdl-button
+  min-width: 55px
+
+a.mdl-button
+  font-size: 12px
+
+// for the bullet of the list
+.fa-bullet
+  font-size: 9px !important
+  padding-right: 15px
+
+.title
+  padding-left: 15px
+
+// for the buttons that are besides a list
+.courses-list
+  .fa-button
+    padding-left: 15px
+
+.mdl-list__item-primary-content
+  span
+    padding-left: 25px
+
+// to get a border in a card
+.mdl-card
+  border: 1px solid $border-color
+  min-height: 100px
+
+// the size of h2 of a card
+.mdl-card__title > h2
+  font-size: 18px
+
+// the padding on the item list was too big
+.mdl-list__item
+  padding: 4px
+  padding-right: 25px
+
+// for the main card
+.main-card
+  header
+    margin-right: 0px
+  div.mdl-card
+    margin-left: 0px
+
+.logo
+  background-image: url('http://placehold.it/350x350')
+  background-position: center
+  background-repeat: no-repeat
+  background-size: cover
+
+// -- FOR THE COURSE CREATION PART
+.cc
+  padding: 0px
+  div
+    //margin: 0px
+    padding: 8px
+
+// for the navigation side
+.cc-nav
+  margin: 0px
+  margin-right: 16px
+  background-color: $color7
+  border-right: 1px solid $color5
+
+  .cc-nav-separator
+    height: 16px
+    border-left: 1px dotted $color3
+    margin-left: 24px
+    margin-top: -7px
+    margin-bottom: -10px
+    padding: 0px
+
+  .cc-nav-item
+    margin-left: 12px
+    i
+      font-size: 10px
+    span
+      font-size: 15px
+      padding-left: 20px
+
+// for the middle part (content)
+.cc-content
+  .mdl-textfield
+    padding: 0px
+    padding-top: 20px
+    padding-bottom: 20px
+    width: 100%
+
+  .cc-content-footer
+    font-size: 12px
+    span
+      margin-left: 15px
+/// for the suggestions part
+.cc-suggest
+  margin: 0px
+  margin-left: 16px
+  background-color: $color7
+  border-left: 1px solid $color5
+
+.cc-suggest, .cc-nav
+  h2
+    font-size: 12px
+  
+
+// -- END OF COURSE CREATION PART
