@@ -6,34 +6,43 @@ block content
 		div.mdl-layout.mdl-js-layout.mdl-layout--fixed-header.mdl-layout--fixed-drawer.has-drawer
 			header.mdl-layout__header
 				div.mdl-layout__header-row
-					span.mdl-layout-title Dashboard
-					
+					span.mdl-layout-title Vidrillete
+			//
+				Existe
+				0. Overview
+				1. Venta de producto
+				2. Servicio de delivery
+				3. Venta de la marca
+				4. Compra de materiales
+				5. Creacion del producto
+				6. Pago al staff
+
 			div.mdl-layout__drawer
 				//span.mdl-layout-title Title my Friend
 				nav.mdl-navigation
-					a.mdl-navigation__link(href="#/")
-						button.mdl-button(aria-label="Overview")
+					a.mdl-navigation__link(href="#/", title="Overview")
+						button.mdl-button
 							i.fa.fa-eye.fa-lg
-					a.mdl-navigation__link(href="#/courses")
-						button.mdl-button(aria-label="Courses")
-							i.fa.fa-book.fa-lg
-					a.mdl-navigation__link(href="#/income")
-						button.mdl-button(aria-label="Incomes")
+					a.mdl-navigation__link(href="#/sellproduct", title="Venta de producto")
+						button.mdl-button
 							i.fa.fa-money.fa-lg
-					a.mdl-navigation__link(href="#/authors")
-						button.mdl-button(aria-label="Authors")
+					a.mdl-navigation__link(href="#/delivery", title="Servicio de delivery")
+						button.mdl-button
+							i.fa.fa-motorcycle.fa-lg
+					a.mdl-navigation__link(href="#/sellbrand", title="Venta de la marca")
+						button.mdl-button
 							i.fa.fa-users.fa-lg
-					// this spacer is not working
-					div.mdl-layout-spacer
-					a.mdl-navigation__link(href="#/configure")
-						button.mdl-button(aria-label="Configure")
-							i.fa.fa-cog.fa-lg
-					//
-						a.mdl-navigation__link(href="#/user")
-							button.mdl-button(aria-label="User")
-								i.fa.fa-user.fa-lg
-					a.mdl-navigation__link(href="#/log-out")
-						button.mdl-button(aria-label="Log Out")
+					a.mdl-navigation__link(href="#/buymaterials", title="Comprar materiales")
+						button.mdl-button
+							i.fa.fa-shopping-cart.fa-lg
+					a.mdl-navigation__link(href="#/create", title="Crear un producto")
+						button.mdl-button
+							i.fa.fa-plus.fa-lg
+					a.mdl-navigation__link(href="#/staffpay", title="Pago al staff")
+						button.mdl-button
+							i.fa.fa-money.fa-lg
+					a.mdl-navigation__link(href="#/log-out", title="Salir")
+						button.mdl-button
 							i.fa.fa-sign-out.fa-lg
 
 			main.mdl-layout__content(flex, layout="column")

@@ -3,35 +3,29 @@ var adminFront = angular.module('app', ['ngRoute']);
 adminFront.config(['$routeProvider', function($routeProvider) {
   $routeProvider.
     when('/', {
-      templateUrl: 'admin/home',
+      templateUrl: 'p/home',
       controller: 'mainCtrl'
     })
-    // -- routes for incomes
-    .when('/income', {
-      templateUrl: 'admin/income'
+    .when('/sellproduct', {
+      templateUrl: 'p/sellproduct'
     })
-		// -/- incomes routes
-
-		// --routes for authors
-    .when('/authors', {
-      templateUrl: 'admin/authors'
+    .when('/delivery', {
+      templateUrl: 'p/delivery'
     })
-		// -/- authors routes
-
-		// -- routes for courses
-    .when('/courses', {
-      templateUrl: 'admin/courses',
-      controller: 'coursesCtrl'
+    .when('/sellbrand', {
+      templateUrl: 'p/sellbrand'
     })
-    .when('/courses/create', {
-      templateUrl: 'admin/courses-p/create',
-      controller: 'coursesCtrl'
+    .when('/buymaterials', {
+      templateUrl: 'p/buymaterials'
     })
-		// -/- courses routes
-		
-		// -- routes for configure 
-    .when('/configure', {
-      templateUrl: 'admin/configure',
+    .when('/create', {
+      templateUrl: 'p/create'
+    })
+    .when('/staffpay', {
+      templateUrl: 'p/staffpay'
+    })
+    .when('/log-out', {
+      templateUrl: 'p/log-out'
     });
 }]);
 
@@ -43,32 +37,5 @@ adminFront.run(function($rootScope){
 
 adminFront.controller('mainCtrl', ['$scope', '$http',
   function($scope, $http) {
-    $scope.thes = "User!";
-   
-    $scope.authors = {};
-
-    $scope.authors.loadAuthors = function () {
-
-      var authors = ['Diego Vargas', 'John Snow'];
-
-      return authors.map(function(c, index) {
-        var cParts = c.split(' ');
-        var contact = {
-          name: c,
-          email: cParts[0][0].toLowerCase() + '.' + cParts[1].toLowerCase() + '@example.com',
-          image: 'http://lorempixel.com/50/50/people?' + index
-        };
-        contact._lowername = contact.name.toLowerCase();
-        return contact;
-      });
-    }
-    
-    $scope.authors.allAuthors = $scope.authors.loadAuthors();
-    $scope.authors.person = [$scope.authors.allAuthors[0]];
-
-  }]);
-
-adminFront.controller('coursesCtrl', ['$scope', '$http',
-  function($scope, $http) {
-    $scope.thes = "User!";
+		console.log("inside main ctrl!");
   }]);

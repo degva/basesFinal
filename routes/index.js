@@ -7,15 +7,9 @@ router.get('/', function(req, res, next) {
 });
 
 // For courses
-router.get('/admin/courses-p/:name', function(req, res, next) {
+router.get('/p/:name', function(req, res, next) {
 	var partial = req.params.name;
-	res.render('partials/courses_partials/' + partial);
-});
-
-// For everything else
-router.get('/admin/:name', function(req, res, next) {
-  var partial = req.params.name;
-  res.render('partials/' + partial);
+	res.render('partials/' + partial);
 });
 
 module.exports = router;
