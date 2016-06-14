@@ -1,0 +1,40 @@
+div.mdl-grid
+
+	// See all orders
+	div.mdl-card.mdl-cell.mdl-cell--6-col
+		div.mdl-card__title
+			h2.mdl-card__title-text Ventas en proceso
+		div.mdl-card__supporting-text
+			table.mdl-data-table.mdl-js-data-table.mdl-shadow--2dp
+				thead
+					tr
+						th Numero de Boleta
+						th.mdl-data-table__cell--non-numeric Cliente
+						th.mdl-data-table__cell--non-numeric Estado
+				tbody
+					tr
+						td 4232622
+						td Funanito de tal
+						td En proceso
+					tr
+						td 4232622
+						td Funanito de tal
+						td Para ser enviado
+
+	div.mdl-card.mdl-cell.mdl-cell--6-col
+		div.mdl-card__title
+			h2.mdl-card__title-text Detalle de Orden
+		div.mdl-card__supporting-text
+			div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+				input.mdl-textfield__input(type='text', id='orden')
+				label.mdl-textfield__label(for='orden') Inserte un numero de orden
+
+	// Card to search details of orders
+	div.mdl-card.mdl-cell.mdl-cell--12-col
+		div.mdl-card__title
+			h2.mdl-card__title-text Detalle de sub-orden
+		div.mdl-card__supporting-text
+			div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+				input.mdl-textfield__input(type='text', id='orden')
+				label.mdl-textfield__label(for='orden') Inserte un numero de suborden
+

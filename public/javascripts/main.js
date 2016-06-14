@@ -3,17 +3,17 @@ var adminFront = angular.module('app', ['ngRoute']);
 adminFront.config(['$routeProvider', function($routeProvider) {
   $routeProvider.
     when('/', {
-      templateUrl: 'p/home',
+      templateUrl: 'p/sellproduct',
       controller: 'mainCtrl'
     })
     .when('/sellproduct', {
       templateUrl: 'p/sellproduct'
     })
-    .when('/delivery', {
-      templateUrl: 'p/delivery'
+    .when('/deliver', {
+      templateUrl: 'p/deliver'
     })
-    .when('/sellbrand', {
-      templateUrl: 'p/sellbrand'
+    .when('/subsidios', {
+      templateUrl: 'p/subsidios'
     })
     .when('/buymaterials', {
       templateUrl: 'p/buymaterials'
