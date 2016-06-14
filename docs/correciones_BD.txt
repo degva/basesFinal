@@ -1,0 +1,94 @@
+antón
+
+	cuando se genera la orden de producción y te faltan materiales
+	se piden pero
+		ćomo sabes que los materiales ya te fueron entregados?
+		
+		tiene que ir un estado que te diga, ya están entregados los materiales a la mitad
+		o ya están completamente entregados
+	
+	también sucede que cuando faltan materiales se genera un egreso,
+	pero hay otros tipos de egreso también, verdad?
+	los egresos son distintos así que tienen que poder reconcoerlos
+	o con un boolean o mejor haciendo más tablas ( porque pueden diferenciarse por muchos campos ) 
+		ejm:
+			comprar a un proveedor
+			pagar al staff - pagas renta, blabla
+			
+
+arla
+	
+	no hay error - y españa te ataca
+	
+Diego
+	
+	siempre y cuando tenga una venta
+	hay sueldo fijo 
+	donde está la bonificación - respondes en la venta - y el profe no le parece
+	
+	profe : como sabes si se le pagó el bono o no? 
+		una tabla falta 
+		se le da el 5% pero como sabes si se le pagó a la persona? 
+		
+	staff con boletas es de muchos a muchos
+	
+Oscar - delivery
+
+	si yo la compra la hice hoy, cuándo me entregan el producto? 
+	
+	por cada compra, uno genera orden de prod. 
+		como puedo saber si mi area de prod está haciendo las cosas bien? 
+		
+	osea tiene que saber cuándo se entregó el producto 
+		un estado de entregado en la boleta, que el producto ya está cancelado 
+	
+	boleta - persona , cliente se relaciona con la boleta 
+		not null
+		
+	delivery
+		debería ser null - la misma persona puede comprar en la misma tienda (?) no entendí bien
+		
+Ken
+
+	por qué hay una relacion cliente - subsidio
+		
+	boleta ya no se relaciona ? osea hay redundancia 
+		si qito relacion cliente - subsidio 
+		y solo me quedo con cliente - boleta - subsidio 
+			si quiero saber balbla podría ir por boleta no?
+			
+			bueno para que la arreglen
+				lo que pasa es que hay subsidios que no necesariamente tienen boletas
+				si todo subsidio pasa por una boleta, no es necesario lo otro
+					proque teniendo la boleta sabes qué clientes hizo qué subsidios
+					
+					habla de que lo que se hace actualmente es solo para asegurar mal registros (igual no le parece tanto)
+					
+Joel
+
+	 boleta - staff es quien hizo esa boleta
+	 
+	 una cosa es quien registra la boleta
+	 y quien hizo la venta
+	 	como es empresa pequeña, uno se asegura
+		
+	
+	OSCAR: Delivery:
+	-	para quienes quieren que se lo lleve a su casa
+	- tiene procesos
+	- falto atributo de fecha de cuando fue procesado/enviado... un record
+	PROFE: 
+		- si la compra la hice hoy, cuando me dan el prod? 
+		- como se si los de produccion estan haciendo las cosas bien? cuando entrego el producto?
+			R. con un estado entregado en la boleta. Se entrego el producto. Fecha de esa entrega.
+	- no siempre se da un delivery
+
+KEN: Venta del subsidio:
+	- Si boleta se relacion subsidio con cliente - por que se relacion con cliente y subsidio
+		R. una persona puede tener varios subsidios
+	- Hay subsidios que no necesariamente tienen boletas.
+		R. si alguien hace un dato erroneo - entonces con la relacion de arriba se arregla
+
+JOEL: Venta del producto
+	- quien hizo la boleta hace la venta
+	- quien hace la venta, tiene el bono
