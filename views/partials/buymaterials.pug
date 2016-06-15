@@ -1,0 +1,76 @@
+div.mdl-grid
+
+	// Card for Courses 
+	div.mdl-card.mdl-cell.mdl-cell--6-col.mdl-cell--12-col-tablet
+		div.mdl-card__title
+			h2.mdl-card__title-text Materiales requeridos
+		div.mdl-card__supporting-text
+			table.mdl-data-table.mdl-js-data-table
+				thead
+					tr
+						th ID
+						th.mdl-data-table__cell--non-numeric Nombre Material
+						th Cantidad Actual
+						th Cantidad Necesaria
+				tbody
+					tr
+						td 001
+						td Botella Azul
+						td 3
+						td 6
+					tr
+						td 002
+						td Vidrio Plano
+						td 0
+						td 8
+
+		div.mdl-card__actions.mdl-card--border
+			a.mdl-button.mdl-js-button.mdl-js-ripple-effect(href="#") Imprimir Lista
+
+	// -- End of card for courses
+
+	// Card for courses to be published
+
+	div.mdl-card.mdl-cell.mdl-cell--6-col.mdl-cell--12-col-tablet
+		div.mdl-card__title
+			h2.mdl-card__title-text Proveedores
+		div.mdl-card__supporting-text
+			div.courses-list.mdl-list
+				// item template
+				div.mdl-list__item
+					span.mdl-list__item-primary-content
+						//i.fa.fa-bullet.fa-circle
+						span Course 3
+					a.mdl-button.mdl-js-button.mdl-js-ripple-effect.mdl-list__item-secondary-action(href="#") Publish!
+				div.mdl-list__item
+					span.mdl-list__item-primary-content
+						//i.fa.fa-bullet.fa-circle
+						span Course 4
+					a.mdl-button.mdl-js-button.mdl-js-ripple-effect.mdl-list__item-secondary-action(href="#") Publish!
+				div.mdl-list__item
+					span.mdl-list__item-primary-content
+						//i.fa.fa-bullet.fa-circle
+						span Course 5
+					a.mdl-button.mdl-js-button.mdl-js-ripple-effect.mdl-list__item-secondary-action(href="#") Publish!
+				div.mdl-list__item
+					span.mdl-list__item-primary-content
+						//i.fa.fa-bullet.fa-circle
+						span Course 5
+					a.mdl-button.mdl-js-button.mdl-js-ripple-effect.mdl-list__item-secondary-action(href="#") Publish!
+						
+	div.mdl-card.mdl-cell.mdl-cell--6-col.mdl-cell--12-col-tablet
+		div.mdl-card__title
+			h2.mdl-card__title-text Agregar un proveedor
+		div.mdl-card__supporting-text
+			div.courses-list.mdl-list
+				// item template
+				div.mdl-list__item
+					span.mdl-list__item-primary-content
+						//i.fa.fa-bullet.fa-circle
+						span Course 3
+					div.starring-display
+						i.fa.fa-star
+						i.fa.fa-star
+						i.fa.fa-star-o
+						i.fa.fa-star-o
+						i.fa.fa-star-o
