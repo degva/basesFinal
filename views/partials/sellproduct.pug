@@ -1,0 +1,76 @@
+div.mdl-grid
+
+	// Card for courses to be published
+
+	div.mdl-card.mdl-cell.mdl-cell--6-col.mdl-cell--12-col-tablet
+		div.mdl-card__title
+			h2.mdl-card__title-text Venta de producto
+		div.mdl-card__supporting-text
+			div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w100
+				input.mdl-textfield__input(type="number", id="ven_nombre")
+				label.mdl-textfield__label(for="ven_nombre") Nombre Cliente
+			button.mdl-button.mdl-js-button.mdl-js-ripple-effect Buscar
+			br
+			label.mdl-radio.mdl-js-radio.mdl-js-ripple-effect(for="factura")
+				input.mdl-radio__button(type="radio", id="factura", name="tipo_opt")
+				span.mdl-radio__label Factura
+			label.mdl-radio.mdl-js-radio.mdl-js-ripple-effect(for="boleta")
+				input.mdl-radio__button(type="radio", id="boleta", name="tipo_opt")
+				span.mdl-radio__label Boleta
+
+			div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w100
+				input.mdl-textfield__input(type="number", id="ven_prod")
+				label.mdl-textfield__label(for="ven_prod") Producto
+			button.mdl-button.mdl-js-button.mdl-js-ripple-effect Agregar
+			table.mdl-data-table.mdl-js-data-table
+				thead
+					tr
+						th ID
+						th.mdl-data-table__cell--non-numeric Nombre Producto
+						th Cantidad
+						th Precio unitario
+				tbody
+					tr
+						td 001
+						td Botella Azul
+						td
+							input(type="number", value="1")
+						td 12.10
+					tr
+						td 002
+						td Vidrio Plano
+						td
+							input(type="number", value="1")
+						td 32.32
+			h5 Subtotal: S/.1232.23
+			br
+			h5 IGV: S/.32.12
+			br
+			h5 Total: S/.232.23
+		div.mdl-card__actions.mdl-card--border
+			a.mdl-button.mdl-js-button.mdl-js-ripple-effect(href="#") Imprimir Boleta
+						
+	div.mdl-card.mdl-cell.mdl-cell--6-col.mdl-cell--12-col-tablet
+		div.mdl-card__title
+			h2.mdl-card__title-text Agregar un cliente
+		div.mdl-card__supporting-text
+			form(action='#')
+				div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w100
+					input.mdl-textfield__input(type="text", id="nombre")
+					label.mdl-textfield__label(for="nombre") Nombre
+				br
+				div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w50
+					input.mdl-textfield__input(type="number", id="telf")
+					label.mdl-textfield__label(for="telf") Telefono 1
+				div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w50
+					input.mdl-textfield__input(type="number", id="cel")
+					label.mdl-textfield__label(for="cel") Celular
+				br
+				div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w100
+					input.mdl-textfield__input(type="email", id="corr")
+					label.mdl-textfield__label(for="corr") Correo
+				br
+				div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w100
+					input.mdl-textfield__input(type="text", id="direc")
+					label.mdl-textfield__label(for="direc") Direccion
+				button.mdl-button.mdl-js-button.mdl-js-ripple-effect Agregar cliente

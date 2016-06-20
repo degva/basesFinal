@@ -122,4 +122,13 @@ a.mdl-button {
 .cc-suggest h2, .cc-nav h2 {
   font-size: 12px; }
 
+.w100 {
+  width: 100%; }
+
+.w50 {
+  width: 50%; }
+
+.angular-google-map-container {
+  height: 400px; }
+
 /*# sourceMappingURL=style.css.map */
