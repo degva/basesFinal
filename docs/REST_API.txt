@@ -17,4 +17,14 @@
 	+ /api/bases/cambiarDireccion/:id
 
 # - SUBSIDIOS
+	+ /api/bases/buscaCliente
+	+ /api/bases/crearSubsidio
+
+# - BUY MATERIALS
+	+ /api/bases/agregarProveedor
+	+ /api/bases/buscarProveedor
+	+ /api/bases/revisarInventario
+	+ /api/bases/registrarMaterial
+
++
 	

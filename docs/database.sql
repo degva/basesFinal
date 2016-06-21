@@ -1,10 +1,14 @@
 
+CREATE SEQUENCE public.estado_estado_id_seq;
+
 CREATE TABLE public.estado (
-                estado_id INTEGER NOT NULL,
+                estado_id INTEGER NOT NULL DEFAULT nextval('public.estado_estado_id_seq'),
                 descrip VARCHAR NOT NULL,
                 CONSTRAINT estado_pk PRIMARY KEY (estado_id)
 );
 
+
+ALTER SEQUENCE public.estado_estado_id_seq OWNED BY public.estado.estado_id;
 
 CREATE SEQUENCE public.estado_de_orden_estado_id_seq;
 
@@ -198,7 +202,6 @@ CREATE TABLE public.compra_productos (
                 egreso_id INTEGER NOT NULL,
                 persona_id INTEGER NOT NULL,
                 proveedor_id INTEGER NOT NULL,
-                descripcion VARCHAR NOT NULL,
                 total REAL NOT NULL,
                 fecha TIMESTAMP,
                 CONSTRAINT compra_productos_pk PRIMARY KEY (egreso_id)
