@@ -1,0 +1,30 @@
+div.mdl-grid
+
+	div.mdl-card.mdl-cell.mdl-cell--6-col.mdl-cell--12-col-tablet
+		div.mdl-card__title
+			h2.mdl-card__title-text Agregar un cliente
+		div.mdl-card__supporting-text
+			form(action='#')
+				div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w100
+					input.mdl-textfield__input(type="text", id="nombre")
+					label.mdl-textfield__label(for="nombre") Nombre
+				br
+				div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w50
+					input.mdl-textfield__input(type="number", id="telf")
+					label.mdl-textfield__label(for="telf") Telefono 1
+				div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w50
+					input.mdl-textfield__input(type="number", id="cel")
+					label.mdl-textfield__label(for="cel") Celular
+				br
+				div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w100
+					input.mdl-textfield__input(type="email", id="corr")
+					label.mdl-textfield__label(for="corr") Correo
+				br
+				div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w100
+					input.mdl-textfield__input(type="number", id="ruc")
+					label.mdl-textfield__label(for="ruc") RUC
+				br
+				div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w100
+					input.mdl-textfield__input(type="text", id="direc")
+					label.mdl-textfield__label(for="direc") Direccion
+				button.mdl-button.mdl-js-button.mdl-js-ripple-effect Agregar cliente

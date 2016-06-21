@@ -11,9 +11,11 @@ div.mdl-grid
 				label.mdl-textfield__label(for="ven_nombre") Nombre Cliente
 			button.mdl-button.mdl-js-button.mdl-js-ripple-effect Buscar
 			br
+
 			label.mdl-radio.mdl-js-radio.mdl-js-ripple-effect(for="factura")
 				input.mdl-radio__button(type="radio", id="factura", name="tipo_opt")
 				span.mdl-radio__label Factura
+			br
 			label.mdl-radio.mdl-js-radio.mdl-js-ripple-effect(for="boleta")
 				input.mdl-radio__button(type="radio", id="boleta", name="tipo_opt")
 				span.mdl-radio__label Boleta
@@ -49,28 +51,3 @@ div.mdl-grid
 			h5 Total: S/.232.23
 		div.mdl-card__actions.mdl-card--border
 			a.mdl-button.mdl-js-button.mdl-js-ripple-effect(href="#") Imprimir Boleta
-						
-	div.mdl-card.mdl-cell.mdl-cell--6-col.mdl-cell--12-col-tablet
-		div.mdl-card__title
-			h2.mdl-card__title-text Agregar un cliente
-		div.mdl-card__supporting-text
-			form(action='#')
-				div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w100
-					input.mdl-textfield__input(type="text", id="nombre")
-					label.mdl-textfield__label(for="nombre") Nombre
-				br
-				div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w50
-					input.mdl-textfield__input(type="number", id="telf")
-					label.mdl-textfield__label(for="telf") Telefono 1
-				div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w50
-					input.mdl-textfield__input(type="number", id="cel")
-					label.mdl-textfield__label(for="cel") Celular
-				br
-				div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w100
-					input.mdl-textfield__input(type="email", id="corr")
-					label.mdl-textfield__label(for="corr") Correo
-				br
-				div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w100
-					input.mdl-textfield__input(type="text", id="direc")
-					label.mdl-textfield__label(for="direc") Direccion
-				button.mdl-button.mdl-js-button.mdl-js-ripple-effect Agregar cliente

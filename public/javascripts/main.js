@@ -6,6 +6,9 @@ adminFront.config(['$routeProvider', 'uiGmapGoogleMapApiProvider', function($rou
       templateUrl: 'p/sellproduct',
       controller: 'mainCtrl'
     })
+    .when('/addclient', {
+      templateUrl: 'p/addclient'
+    })
     .when('/sellproduct', {
       templateUrl: 'p/sellproduct'
     })
