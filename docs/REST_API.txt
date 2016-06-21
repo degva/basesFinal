@@ -2,5 +2,19 @@
 + REST API +
 +----------+
 
+# - ADD CLIENT
+	+ /api/bases/agregarCliente
+
 # - SELL PRODUCT (VENTA DE PRODUCTO)
-	+ 
+	+ /api/bases/obtenerCliente
+	+ /api/bases/obtenerProducto
+	+ /api/bases/agregarVenta
+
+# - DELIVER
+	+ /api/bases/obtenerVentas
+	+ /api/bases/obtenerOrden/:id
+	+ /api/bases/obtenerSubOrdenes/:id
+	+ /api/bases/cambiarDireccion/:id
+
+# - SUBSIDIOS
+	

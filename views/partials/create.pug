@@ -6,13 +6,13 @@ div.mdl-grid
 			h2.mdl-card__title-text Creacion de un producto
 		div.mdl-card__supporting-text
 			div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w100
-				input.mdl-textfield__input(type="number", id="pro_nom")
+				input.mdl-textfield__input(type="text", id="pro_nom")
 				label.mdl-textfield__label(for="pro_nom") Nombre
 			div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w100
-				input.mdl-textfield__input(type="number", id="pro_desc")
+				input.mdl-textfield__input(type="text", id="pro_desc")
 				label.mdl-textfield__label(for="pro_desc") Descripcion
 			div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w100
-				input.mdl-textfield__input(type="number", id="ven_prod")
+				input.mdl-textfield__input(type="text", id="ven_prod")
 				label.mdl-textfield__label(for="ven_prod") Material
 			button.mdl-button.mdl-js-button.mdl-js-ripple-effect Agregar
 			table.mdl-data-table.mdl-js-data-table
@@ -21,20 +21,17 @@ div.mdl-grid
 						th ID
 						th.mdl-data-table__cell--non-numeric Nombre Material
 						th Cantidad
-						th Precio unitario
 				tbody
 					tr
 						td 001
 						td Botella Azul
 						td
 							input(type="number", value="1")
-						td 12.10
 					tr
 						td 002
 						td Vidrio Plano
 						td
 							input(type="number", value="1")
-						td 32.32
 			h5 Total: S/.232.23
 		div.mdl-card__actions.mdl-card--border
 			a.mdl-button.mdl-js-button.mdl-js-ripple-effect(href="#/courses/create") Crear producto
