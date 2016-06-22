@@ -1,21 +1,3 @@
-tabla de estados de una orden
-
-id           descrip
-0            no hay delivery
-1            orden registrada
-2            orden procesada
-3            listo para enviar 
-4            enviado
-
-tabla de estados de un subproceso
-
-id           descrip
-1            proceso registrado
-2            fabricandose
-3            listo para enviar 
-
-
-
 create or replace procedure cambiarDireccion(codigoBoleta integer,opcion integer)
 is
   estadoId integer;

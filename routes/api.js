@@ -168,23 +168,85 @@ var api = {
 		var igv = req.body.igv;
 
 		var db = pgp(pgCn);
-		
-		var query = "select agregar_venta (precio_total,cliente_id, factura, fecha, staff_id) values ($1, $2, $3, $4, $5, $6)";
+	
+		var fecha = new Date();
+		var anio = fecha.getYear() + 1900;
+		var fecha_string = fecha.getMonth() + "-" + fecha.getDate() + "-" + anio;
+
+		var query = "select agregar_venta ($1, $2, $3, '" + fecha_string+ "', $4)";
+		var query2 = "insert into prod_x_boleta values ($1, $2, $3, $4)";
 		if (factura) {
 			precio_total = subtotal + igv;
 		} else {
 			precio_total = subtotal;
 		}
 
-		db.one(query, [precio_total, cliente_id, factura, now(), staff_id])
+		db.one(query, [precio_total, cliente_id, factura, staff_id])
 			.then(function(data) {
-				alert('se agrego el producto!');
+				var id = data.agregar_venta;
+				console.log('Eu ' + id);
+				productos.forEach(function(item) {
+					db.none(query2, [id, item.id, 0.0, item.cantidad])
+						.then(function(d){
+							res.sendStatus(200);
+						})
+						.catch(function(err) {
+							console.log(err);
+							res.sendStatus(404);
+						});
+				});
 			})
 			.catch(function(error) {
 				console.log(error);
 				res.sendStatus(404);
 			});
+	},
+	crearSubsidio: function(req, res) {
+		var latitud = req.body.latitud;
+		var longitud = req.body.longitud;
+		var ruc = req.body.ruc;
+		var direccion = req.body.direc;
+		var id = req.body.id;
+
+		var db = pgp(pgCn);
+
+		query = "select comprar_marca($1,$2,$3,$4,$5)";
+		db.one(query, [id, ruc, latitud, longitud, direccion])
+			.then(function(data) {
+				res.sendStatus(200);
+			})
+			.catch(function(err) {
+				console.log(err);
+				res.sendStatus(404);
+			});
+	},
+	carlacachis : function(req, res) {
+		var prob_id = req.body.prob_id;
+		var monto = req.body.monto;
+		var items = req.body.items;
+
+		var db = pgp(pgCn);
+		
+		query = "select registrarcompra($1,$2,$3)";
+		db.one(query, [3, prob_id, monto])
+			.then(function(data) {
+				items.forEach(function(item){
+					db.one("select agregar_material($1,$2,$3,$4)",[item.id, data.registrarcompra, item.precio, item.quantity])
+						.then(function(data) {
+							res.sendStatus(200);
+						})
+						.catch(function(err) {
+							console.log(err);
+							res.sendStatus(404);
+						});
+				});
+			})
+			.catch(function(err) {
+				console.log(err);
+				res.sendStatus(404);
+			});
 	}
+
 };
 
 module.exports = api;

@@ -79,7 +79,6 @@ div.mdl-grid(ng-controller="buyMatCtrl")
 				input.mdl-textfield__input(type="text", id="direc", ng-model="agp.dato.direccion")
 				label.mdl-textfield__label(for="direc") Direccion
 			button.mdl-button.mdl-js-button.mdl-js-ripple-effect(ng-click="agp.agregarProveedor()") Agregar Proveedor
-
 	div.mdl-card.mdl-cell.mdl-cell--6-col.mdl-cell--12-col-tablet
 		div.mdl-card__title
 			h2.mdl-card__title-text Agregar materiales
@@ -99,7 +98,7 @@ div.mdl-grid(ng-controller="buyMatCtrl")
 				tbody(ng-repeat="i in agm.data.items")
 					tr
 						td 
-							input(type="text", ng-model="i.nombre")
+							input(type="text", ng-model="i.id")
 						td 
 							input(type="number", ng-model="i.quantity")
 						td
@@ -107,4 +106,4 @@ div.mdl-grid(ng-controller="buyMatCtrl")
 				button(ng-click="agm.addItem()") Agregar Material
 
 		div.mdl-card__actions.mdl-card--border
-			a.mdl-button.mdl-js-button.mdl-js-ripple-effect(href="#",ng-click="agm.agregarMateriales()") Agregar Materiales
+			button.mdl-button.mdl-js-button.mdl-js-ripple-effect(ng-click="agm.agregarMateriales()") Agregar Materiales

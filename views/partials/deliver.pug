@@ -1,4 +1,4 @@
-div.mdl-grid(ng-controller="sellProdCtrl")
+div.mdl-grid(ng-controller="deliverCtrl")
 
 	// See all orders
 	div.mdl-card.mdl-cell.mdl-cell--6-col
@@ -11,19 +11,34 @@ div.mdl-grid(ng-controller="sellProdCtrl")
 						th Numero de Boleta
 						th.mdl-data-table__cell--non-numeric Cliente
 						th.mdl-data-table__cell--non-numeric Estado
+						th Cambiar direccion
 				tbody(ng-repeat="vp in sp.venta_procesos")
-					tr
+					tr(ng-click="sp.tomaProceso(vp)")
 						td {{ vp.num }}
 						td {{ vp.cliente }}
 						td {{ vp.estado }}
+						td
+							button Cambiar
 
 	div.mdl-card.mdl-cell.mdl-cell--6-col
 		div.mdl-card__title
 			h2.mdl-card__title-text Detalle de Orden
 		div.mdl-card__supporting-text
 			div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
-				input.mdl-textfield__input(type='text', id='orden')
+				input.mdl-textfield__input(type='text', id='orden', ng-model="sp.nu_orden")
 				label.mdl-textfield__label(for='orden') Inserte un numero de orden
+			table.mdl-data-table.mdl-js-data-table(ng-show="sp.nu_ordenes")
+				thead
+					tr
+						th Numero de SubOrden
+						th Descuento
+						th Cantidad
+				tbody(ng-repeat="vp in sp.nu_ordenes")
+					tr(ng-click="sp.tomaSubProceso(vp)")
+						td {{ vp.id }}
+						td {{ vp.descuento * 100}}%
+						td {{ vp.cantidad }}
+
 
 	// Card to search details of orders
 	div.mdl-card.mdl-cell.mdl-cell--12-col
@@ -31,6 +46,14 @@ div.mdl-grid(ng-controller="sellProdCtrl")
 			h2.mdl-card__title-text Detalle de sub-orden
 		div.mdl-card__supporting-text
 			div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
-				input.mdl-textfield__input(type='text', id='orden')
+				input.mdl-textfield__input(type='text', id='orden', ng-model="sp.nu_suborden")
 				label.mdl-textfield__label(for='orden') Inserte un numero de suborden
-
+			table.mdl-data-table.mdl-js-data-table(ng-show="sp.nu_subordenes")
+				thead
+					tr
+						th Numero de SubOrden
+						th Estado
+				tbody(ng-repeat="vp in sp.nu_subordenes")
+					tr
+						td {{ vp.id }}
+						td {{ vp.estado }}

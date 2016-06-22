@@ -25,78 +25,19 @@ $$
 LANGUAGE plpgsql;
 
 
-// ---------------------
-CREATE OR REPLACE PROCEDURE venta(
-    cliente IN INTEGER,
-    preciot IN NUMERIC,
-    factobol IN INTEGER,
-    staffid IN INTEGER)
-IS
+CREATE OR REPLACE FUNCTION agregar_venta (monto numeric, _cliente_id integer, factura integer, _fecha timestamp, _staff_id integer)
+	RETURNS integer AS
+$$
+DECLARE
+	bo_id integer;
 BEGIN
-  INSERT
-  INTO BOLETA
-    (
-      PRECIO_TOTAL,
-      CLIENTE_ID,
-      FACTURA,
-      FECHA,
-      STAFF_ID)
-      
-    VALUES
-    (
-      preciot,
-      cliente,
-      factobol,
-      SYSDATE,
-      staffid);
-END venta;
-
-
-CREATE OR REPLACE PROCEDURE detalle_boleta(
-    boletaid IN INTEGER,
-    productoid IN INTEGER,
-    desc IN FLOAT,
-    cant IN INTEGER)
-IS
-BEGIN
-  INSERT
-  INTO BOLETA
-    (
-      BOLETA_ID,
-      PRODUCTO_ID,
-      DESCUENTO,
-      CANTIDAD)
-      
-    VALUES
-    (
-      boletaid,
-      productoid,
-      desc,
-      cant);
-END detalle_boleta;
-
-
-
-CREATE OR REPLACE PROCEDURE produccion(
-    personaid IN INTEGER,
-    boletaid IN INTEGER,
-    productoid IN INTEGER)
-IS
-BEGIN
-  INSERT
-  INTO BOLETA
-    (
-      PERSONA_ID,
-      BOLETA_ID,
-      PRODUCTO_ID,
-      ESTADO_ID)
-      
-    VALUES
-    (
-      personaid,
-      boletaid,
-      productoid,
-      1);
-END produccion;
+		insert into boleta
+			(precio_total, cliente_id, factura, fecha, staff_id) values
+			(monto, _cliente_id, factura = 0, _fecha, _staff_id)
+			returning boleta_id into bo_id;
+		return bo_id;
+END;
+$$
+LANGUAGE plpgsql;
 
 

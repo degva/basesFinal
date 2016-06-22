@@ -85,7 +85,7 @@ adminFront.controller('sellProdCtrl', ['$scope', '$http',
 			subtotal: function() {
 				var a = 0;
 				$scope.vp.productos.forEach(function(i) {
-					a += i.cantidad * i.precio;
+					a += i.cantidad * i.precio_unitario;
 				});
 				return a;
 			},
@@ -152,14 +152,14 @@ adminFront.controller('sellProdCtrl', ['$scope', '$http',
 						cliente_id: $scope.vp.cliente_id,
 						productos: $scope.vp.productos,
 						factura: $scope.vp.factura,
-						staff_id: 1,
+						staff_id: 3,
 						subtotal: $scope.vp.subtotal(),
 						igv: $scope.vp.igv()
 					}),
 					headers: {'Content-Type': 'application/json'}
 				})
 				.success(function(data) {
-					$scope.vp.producto_resultado = data;
+					alert('venta hecha');
 				})
 				.error(function(err) {
 					alert('algo paso');
@@ -176,10 +176,42 @@ adminFront.controller('deliverCtrl', ['$scope', '$http',
   function($scope, $http) {
 		$scope.sp = {
 			venta_procesos: [
-				{num: 232345,cliente: "ste men 1", estado: "En proceso"},
-				{num: 454831,cliente: "ste men 2", estado: "Para ser enviado"}
-			]
-		}
+				{num: 58327,cliente: "ste men 1", estado: "En proceso",
+					ordenes: [
+						{id: 2345, descuento: 0.5, cantidad: 2,
+							subordenes: [
+								{id: 1234,estado:'en contruccion'}
+							]
+						},
+						{id: 6782, descuento: 0, cantidad: 3,
+							subordenes: [
+								{id: 3234,estado:'No se Loco'}
+							]
+						}
+					]
+				},
+				{num: 45481,cliente: "ste men 2", estado: "Para ser enviado", 
+					ordenes: [
+						{id: 4234, descuento: 0.05, cantidad: 2,
+							subordenes: [
+								{id: 1234,estado:'en contruccion'},
+								{id: 4234,estado:'No se :\'v'},
+								{id: 3424,estado:'Asume no ma'}
+							]
+						},
+						{id: 6345, descuento: 0.0, cantidad: 8},
+						{id: 1342, descuento: 0.2, cantidad: 6}
+					]
+				}
+			],
+			tomaProceso: function(item) {
+				$scope.sp.nu_orden = item.num;
+				$scope.sp.nu_ordenes = item.ordenes;
+			},
+			tomaSubProceso: function(item) {
+				$scope.sp.nu_subordenes = item.subordenes;
+			}
+		};
 	}
 ]);
 
@@ -204,7 +236,6 @@ adminFront.controller('buyMatCtrl', ['$scope', '$http',
 					})
 					.error(function(data, status, headers, config) {
 						alert('no se encontro a nadie');
-						$scope.bm.search = {};
 					});
 				}
 			}
@@ -234,10 +265,21 @@ adminFront.controller('buyMatCtrl', ['$scope', '$http',
 				items : []
 			},
 			addItem: function() {
-				$scope.agm.data.items.push({nombre: 'material', quantity: '0', precio: '0'});
+				$scope.agm.data.items.push({id: 0, quantity: '0', precio: '0'});
 			},
 			agregarMateriales: function() {
-				// TODO
+				$http({
+					url: '/api/bases/agregarMaterial',
+					method: 'post',
+					data: JSON.stringify($scope.agm.data),
+					headers: {'Content-Type': 'application/json'}
+				})
+				.success(function(data, status, headers, config) {
+					alert('yay!');
+				})
+				.error(function(data, status, headers, config) {
+					console.log('error');
+				});
 			}
 		};
 		$http({
@@ -367,18 +409,53 @@ adminFront.controller('subsiCtrl', ['$scope', '$http', 'uiGmapGoogleMapApi',
 		// -------------------------------------------------------------------------------
 		
 		$scope.sub = {
-			clientes : [
-				{id: 1, nombre: 'Pepito', apellido: 'de los Palotes', telefono: 23452345},
-				{id: 2, nombre: 'Jhon', apellido: 'Snow', telefono: 293485}
-			],
-			takeCliente: function(id) {
-				console.log("Taken: " + id);
+			buscarCliente: function() {
+				// buscar con el API a
+				$http({
+					url: '/api/bases/buscarCliente',
+					method: 'post',
+					data: JSON.stringify({
+						dato: $scope.sub.cliente_bus
+					}),
+					headers: {'Content-Type': 'application/json'}
+				})
+				.success(function(data) {
+					$scope.sub.clientes = data;
+				})
+				.error(function(err) {
+					alert('algo paso');
+					console.log(err);
+				});
+			},
+			tomaCliente: function(item) {
+				$scope.sub.cliente_id = item.id;
+				$scope.sub.cliente_nombre = item.nombre;
+				$scope.sub.cliente_apellido = item.apellido;
+				$scope.sub.clientes = [];
 			},
 			addSubsidio: function() {
 				var lat = $scope.marker.coords.latitude;
 				var lon = $scope.marker.coords.longitude;
-				console.log("Latitud: " + lat);
-				console.log("Longitud: " + lon);
+
+				$http({
+					url: '/api/bases/crearSubsidio',
+					method: 'post',
+					data: JSON.stringify({
+						latitud: lat,
+						longitud: lon,
+						direc: $scope.sub.direccion,
+						ruc: $scope.sub.ruc,
+						id: $scope.sub.cliente_id
+					}),
+					headers: {'Content-Type': 'application/json'}
+				})
+				.success(function(data) {
+					alert('ocs :\'v');
+				})
+				.error(function(err) {
+					alert('algo paso');
+					console.log(err);
+				});
 			}
 		};
 	}

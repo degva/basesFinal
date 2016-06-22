@@ -33,17 +33,17 @@ div.mdl-grid(ng-controller="sellProdCtrl")
 			div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w100
 				input.mdl-textfield__input(type="text", id="ven_prod", ng-model="vp.prod_busqueda")
 				label.mdl-textfield__label(for="ven_prod") Producto
-			button.mdl-button.mdl-js-button.mdl-js-ripple-effect(ng-click="vp.buscarProducto()") Buscar
+			button.mdl-button.mdl-js-button.mdl-js-ripple-effect(ng-click="vp.buscaProducto()") Buscar
 			br
-			table.mdl-data-table.mdl-js-data-table(ng-show="vp.cliente_resultado")
+			table.mdl-data-table.mdl-js-data-table(ng-show="vp.producto_resultado")
 				thead
 					tr
 						th.mdl-data-table__cell--non-numeric Nombre
-						th.mdl-data-table__cell--non-numeric Apellido
+						th.mdl-data-table__cell--non-numeric Descripcion
 				tbody(ng-repeat="item in vp.producto_resultado")
 					tr(ng-click="vp.tomaProducto(item)")
 						td {{ item.nombre }}
-						td {{ item.apellido }}
+						td {{ item.descripcion }}
 			hr
 			table.mdl-data-table.mdl-js-data-table()
 				thead
@@ -58,7 +58,7 @@ div.mdl-grid(ng-controller="sellProdCtrl")
 						td {{ item.nombre }}
 						td
 							input(type="number", value="1", ng-model="item.cantidad")
-						td {{ item.precio }}
+						td {{ item.precio_unitario }}
 			h5 Subtotal: S/.{{ vp.subtotal().toFixed(2) }}
 			br(ng-show="vp.factura == 1")
 			h5(ng-show="vp.factura == 1") IGV: S/.{{ vp.igv().toFixed(2) }}

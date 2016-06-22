@@ -5,19 +5,20 @@ div.mdl-grid(ng-controller='subsiCtrl')
 			h2.mdl-card__title-text Buscar Cliente
 		div.mdl-card__supporting-text
 			div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w100
-				input.mdl-textfield__input(type="text", id="src_cli")
+				input.mdl-textfield__input(type="text", id="src_cli", ng-model="sub.cliente_bus")
 				label.mdl-textfield__label(for="src_cli") Nombre
-			table.mdl-data-table.mdl-js-data-table
+			button.mdl-button.mdl-js-button.mdl-js-ripple-effect(ng-click="sub.buscarCliente()") Buscar
+			table.mdl-data-table.mdl-js-data-table(ng-show="sub.clientes")
 				thead
 					tr
 						th.mdl-data-table__cell--non-numeric Nombre
 						th.mdl-data-table__cell--non-numeric Apellido
-						th Celular
-				tbody(ng-repeat="p in sub.clientes")
-					tr(ng-click="sub.takeCliente(p.id)")
-						td {{ p.nombre }}
-						td {{ p.apellido }}
-						td {{ p.telefono }}
+				tbody(ng-repeat="item in sub.clientes")
+					tr(ng-click="sub.tomaCliente(item)")
+						td {{ item.nombre }}
+						td {{ item.apellido }}
+
+			hr
 
 	// -- End of card for courses
 
@@ -31,20 +32,23 @@ div.mdl-grid(ng-controller='subsiCtrl')
 				div.mdl-cell--6-col
 					h5 Datos del cliente
 					div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w100
-						input.mdl-textfield__input(type="text", id="src_prove")
+						input.mdl-textfield__input(type="text", id="src_prove", ng-model="sub.cliente_nombre")
 						label.mdl-textfield__label(for="src_prove") Nombre
 					div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w100
-						input.mdl-textfield__input(type="text", id="src_prove")
+						input.mdl-textfield__input(type="text", id="src_prove", ng-model="sub.cliente_apellido")
 						label.mdl-textfield__label(for="src_prove") Apellido
 					div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w100
 						input.mdl-textfield__input(type="number", id="src_prove")
 						label.mdl-textfield__label(for="src_prove") Celular
 					div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w100
-						input.mdl-textfield__input(type="number", id="src_prove")
+						input.mdl-textfield__input(type="number", id="src_prove", ng-model="sub.ruc")
 						label.mdl-textfield__label(for="src_prove") RUC
 					div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w100
 						input.mdl-textfield__input(type="text", id="src_prove")
 						label.mdl-textfield__label(for="src_prove") Razon Social
+					div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w100
+						input.mdl-textfield__input(type="text", id="src_prove", ng-model="sub.direccion")
+						label.mdl-textfield__label(for="src_prove") Direccion
 				div.mdl-cell--6-col
 					h5 Ubicacion del subsidio
 					ui-gmap-google-map(center='map.center', zoom='map.zoom', options="options")
