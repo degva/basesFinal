@@ -25,10 +25,12 @@ adminFront.config(['$routeProvider', 'uiGmapGoogleMapApiProvider', function($rou
 			controller: 'buyMatCtrl'
     })
     .when('/create', {
-      templateUrl: 'p/create'
+      templateUrl: 'p/create',
+			controller: 'createCtrl'
     })
     .when('/staffpay', {
-      templateUrl: 'p/staffpay'
+      templateUrl: 'p/staffpay',
+			controller: 'staffCtrl'
     })
     .when('/log-out', {
       templateUrl: 'p/log-out'
@@ -58,7 +60,7 @@ adminFront.controller('sellProdCtrl', ['$scope', '$http',
 			],
 			factura: 1,
 			subtotal: function() {
-				a = 0;
+				var a = 0;
 				$scope.vp.productos.forEach(function(i) {
 					a += i.cantidad * i.precio;
 				});
@@ -112,6 +114,56 @@ adminFront.controller('buyMatCtrl', ['$scope', '$http',
 				console.log($scope.agp.correo);
 			}
 		};
+	}
+]);
+
+adminFront.controller('createCtrl', ['$scope', '$http',
+	function($scope, $http) {
+		$scope.cc = {
+			materiales : [
+				{id: 234, nombre: "helas", cant: 34, precio: 34.33}
+			],
+			buscar : function() {
+				var str = $scope.cc.material_busc;
+				// mandar str to API
+				console.log("Tu asume no mas: " + str);
+			},
+			total: function() {
+				var a = 0;
+				$scope.cc.materiales.forEach(function(i) {
+					a += i.cant * i.precio;
+				});
+				return (a * 1.55).toFixed(2);
+			},
+			create_prod: function() {
+				// toma todas las variables y las manda por API
+			}
+		};
+	}
+]);
+
+adminFront.controller('staffCtrl', ['$scope', '$http',
+	function($scope, $http) {
+		$scope.sp = {
+			staffs : [
+				{id: 234, nombre: 'ssg'},
+				{id: 564, nombre: 'hfkdg'}
+			],
+			putIntoDetails : function (id) {
+				$scope.sp._st_id = id;
+				$scope.sp._st_details = [
+					{descripcion: 'thiss that', monto: 234},
+					{descripcion: 'thiss that', monto: 347.33}
+				];
+				$scope.sp._st_total = 0;
+				$scope.sp._st_details.forEach(function(i) {
+					$scope.sp._st_total += i.monto;
+				});
+			},
+			pagar: function() {
+				// mandar todo por la API
+			}
+		}
 	}
 ]);
 

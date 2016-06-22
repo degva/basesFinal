@@ -1,0 +1,74 @@
+CREATE OR REPLACE PROCEDURE venta(
+    cliente IN INTEGER,
+    preciot IN NUMERIC,
+    factobol IN INTEGER,
+    staffid IN INTEGER)
+IS
+BEGIN
+  INSERT
+  INTO BOLETA
+    (
+      PRECIO_TOTAL,
+      CLIENTE_ID,
+      FACTURA,
+      FECHA,
+      STAFF_ID)
+      
+    VALUES
+    (
+      preciot,
+      cliente,
+      factobol,
+      SYSDATE,
+      staffid);
+END venta;
+
+
+CREATE OR REPLACE PROCEDURE detalle_boleta(
+    boletaid IN INTEGER,
+    productoid IN INTEGER,
+    desc IN FLOAT,
+    cant IN INTEGER)
+IS
+BEGIN
+  INSERT
+  INTO BOLETA
+    (
+      BOLETA_ID,
+      PRODUCTO_ID,
+      DESCUENTO,
+      CANTIDAD)
+      
+    VALUES
+    (
+      boletaid,
+      productoid,
+      desc,
+      cant);
+END detalle_boleta;
+
+
+
+CREATE OR REPLACE PROCEDURE produccion(
+    personaid IN INTEGER,
+    boletaid IN INTEGER,
+    productoid IN INTEGER)
+IS
+BEGIN
+  INSERT
+  INTO BOLETA
+    (
+      PERSONA_ID,
+      BOLETA_ID,
+      PRODUCTO_ID,
+      ESTADO_ID)
+      
+    VALUES
+    (
+      personaid,
+      boletaid,
+      productoid,
+      1);
+END produccion;
+
+

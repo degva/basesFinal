@@ -1,4 +1,4 @@
-div.mdl-grid
+div.mdl-grid(ng-controller="staffCtrl")
 
 	// Card for Courses 
 	div.mdl-card.mdl-cell.mdl-cell--6-col.mdl-cell--12-col-tablet
@@ -10,13 +10,10 @@ div.mdl-grid
 					tr
 						th Staff ID
 						th.mdl-data-table__cell--non-numeric Nombre
-				tbody
-					tr
-						td 4232622
-						td Funanito de tal
-					tr
-						td 4232622
-						td Funanito de tal
+				tbody(ng-repeat="p in sp.staffs")
+					tr(ng-click="sp.putIntoDetails(p.id)")
+						td {{ p.id }}
+						td {{ p.nombre }}
 
 	// -- End of card for courses
 
@@ -26,19 +23,18 @@ div.mdl-grid
 		div.mdl-card__title
 			h2.mdl-card__title-text Detalles
 		div.mdl-card__supporting-text
-			table.mdl-data-table.mdl-js-data-table
+			h5(ng-hide="sp._st_id") No hay detalles :'v
+			table.mdl-data-table.mdl-js-data-table(ng-show="sp._st_id")
 				thead
 					tr
 						th.mdl-data-table__cell--non-numeric Descripcion
 						th Monto
-				tbody
+				tbody(ng-repeat="s in sp._st_details")
 					tr
-						td Salario
-						td 122.10
-					tr
-						td Venta 23/12
-						td 32.32
-			h5 Total: S/.232.23
+						td {{ s.descripcion }}
+						td {{ s.monto.toFixed(2) }}
+
+			h5(ng-show="sp._st_id") Total: S/.{{ sp._st_total.toFixed(2) }}
 		div.mdl-card__actions.mdl-card--border
-			a.mdl-button.mdl-js-button.mdl-js-ripple-effect(href="#") Pagar
+			a.mdl-button.mdl-js-button.mdl-js-ripple-effect(href="#", ng-click="sp.pagar()") Pagar
 						

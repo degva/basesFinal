@@ -1,0 +1,30 @@
+--buscar al cliente por nombre, apellido, celular , ruc, etc
+--		aquí no hay excepciones porque así pongas un caracter especial no habrá problema, simplemente no se mostrará
+--		devuelve toda la lista de clientes que concuerden incluso los que no tengan RUC los muestra
+
+create or replace procedure buscar_cliente (cadena_a_buscar varchar2) IS
+	   
+	BEGIN  
+		-- encontrar a la persona por nombre, apellido , celular
+
+		select
+			p.nombre , p.apellido , p.telefono , c.RUC
+		from
+			personas p,
+			clientes c
+		where
+			(p.nombre like cadena_a_buscar% OR
+			p.apellido like cadena_a_buscar% OR
+			p.celular like cadena_a_buscar% OR
+			c.RUC like cadena_a_buscar%) AND
+			p.id_persona = c.id_persona;
+
+		-- no hay excepcion de data no found porque cuando no muestra simplemente no muestras nada
+			
+	EXCEPTION 
+		
+		WHEN OTHERS THEN
+			dbms_output.put_line('Se desconoce el error');
+				ROLLBACK;
+
+END buscar_cliente;
