@@ -51,7 +51,9 @@ CREATE TABLE public.Personas (
                 persona_id INTEGER NOT NULL DEFAULT nextval('public.personas_persona_id_seq'),
                 nombre VARCHAR NOT NULL,
                 apellido VARCHAR NOT NULL,
-                telefono VARCHAR NOT NULL,
+                telefono NUMERIC NOT NULL,
+                celular NUMERIC NOT NULL,
+                correo VARCHAR NOT NULL,
                 direccion VARCHAR NOT NULL,
                 CONSTRAINT personas_pk PRIMARY KEY (persona_id)
 );
@@ -83,24 +85,24 @@ ALTER SEQUENCE public.subsidios_subsidiario_id_seq OWNED BY public.Subsidios.sub
 
 CREATE TABLE public.Staff (
                 persona_id INTEGER NOT NULL,
-                sueldo NUMERIC(4) NOT NULL,
+                sueldo REAL NOT NULL,
                 fecha_ingreso TIMESTAMP NOT NULL,
                 CONSTRAINT staff_pk PRIMARY KEY (persona_id)
 );
 
 
-CREATE SEQUENCE public.main_egreso_id_seq_1;
+CREATE SEQUENCE public.pago_staff_egreso_id_seq;
 
-CREATE TABLE public.pago_stafff (
-                egreso_id INTEGER NOT NULL DEFAULT nextval('public.main_egreso_id_seq_1'),
+CREATE TABLE public.pago_staff (
+                egreso_id INTEGER NOT NULL DEFAULT nextval('public.pago_staff_egreso_id_seq'),
                 persona_id INTEGER NOT NULL,
                 staff_id INTEGER NOT NULL,
                 fecha_pago TIMESTAMP,
-                CONSTRAINT pago_stafff_pk PRIMARY KEY (egreso_id)
+                CONSTRAINT pago_staff_pk PRIMARY KEY (egreso_id)
 );
 
 
-ALTER SEQUENCE public.main_egreso_id_seq_1 OWNED BY public.pago_stafff.egreso_id;
+ALTER SEQUENCE public.pago_staff_egreso_id_seq OWNED BY public.pago_staff.egreso_id;
 
 CREATE SEQUENCE public.ingresos_venta_id_seq;
 
@@ -135,7 +137,7 @@ CREATE TABLE public.Productos (
                 producto_id INTEGER NOT NULL DEFAULT nextval('public.productos_producto_id_seq'),
                 descripcion VARCHAR NOT NULL,
                 nombre VARCHAR NOT NULL,
-                precio NUMERIC(4) NOT NULL,
+                precio REAL NOT NULL,
                 CONSTRAINT productos_pk PRIMARY KEY (producto_id)
 );
 
@@ -159,8 +161,10 @@ CREATE TABLE public.prod_x_boleta (
 );
 
 
+CREATE SEQUENCE public.orden_produccion_orden_compra_id_seq;
+
 CREATE TABLE public.orden_produccion (
-                orden_prod_id INTEGER NOT NULL,
+                orden_prod_id INTEGER NOT NULL DEFAULT nextval('public.orden_produccion_orden_compra_id_seq'),
                 persona_id INTEGER NOT NULL,
                 boleta_id INTEGER NOT NULL,
                 producto_id INTEGER NOT NULL,
@@ -168,6 +172,8 @@ CREATE TABLE public.orden_produccion (
                 CONSTRAINT orden_produccion_pk PRIMARY KEY (orden_prod_id)
 );
 
+
+ALTER SEQUENCE public.orden_produccion_orden_compra_id_seq OWNED BY public.orden_produccion.orden_prod_id;
 
 CREATE TABLE public.lista_materiales (
                 orden_prod_id INTEGER NOT NULL,
@@ -183,9 +189,9 @@ CREATE TABLE public.Proveedores (
                 proveedor_id INTEGER NOT NULL DEFAULT nextval('public.proveedores_proveedor_id_seq'),
                 razon_social VARCHAR NOT NULL,
                 descripcion VARCHAR NOT NULL,
-                ruc VARCHAR NOT NULL,
+                ruc NUMERIC NOT NULL,
                 telefono NUMERIC NOT NULL,
-                celular NUMERIC NOT NULL,
+                celular NUMERIC,
                 correo VARCHAR NOT NULL,
                 direccion VARCHAR NOT NULL,
                 CONSTRAINT proveedores_pk PRIMARY KEY (proveedor_id)
@@ -311,14 +317,14 @@ ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
-ALTER TABLE public.pago_stafff ADD CONSTRAINT staff_pago_stafff_fk
+ALTER TABLE public.pago_staff ADD CONSTRAINT staff_pago_stafff_fk
 FOREIGN KEY (persona_id)
 REFERENCES public.Staff (persona_id)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
-ALTER TABLE public.pago_stafff ADD CONSTRAINT staff_pago_stafff_fk1
+ALTER TABLE public.pago_staff ADD CONSTRAINT staff_pago_stafff_fk1
 FOREIGN KEY (staff_id)
 REFERENCES public.Staff (persona_id)
 ON DELETE NO ACTION

@@ -1,4 +1,4 @@
-div.mdl-grid
+div.mdl-grid(ng-controller="createCtrl")
 
 	// Card for Courses 
 	div.mdl-card.mdl-cell.mdl-cell--6-col.mdl-cell--12-col-tablet
@@ -15,6 +15,16 @@ div.mdl-grid
 				input.mdl-textfield__input(type="text", id="ven_prod", ng-model="cc.material_busc")
 				label.mdl-textfield__label(for="ven_prod") Material
 			button.mdl-button.mdl-js-button.mdl-js-ripple-effect(ng-click="cc.buscar()") Buscar
+			table.mdl-data-table.mdl-js-data-table(ng-show="cc.resultados")
+				thead
+					tr
+						th.mdl-data-table__cell--non-numeric Nombre
+						th.mdl-data-table__cell--non-numeric Descripcion
+				tbody(ng-repeat="mat in cc.resultados")
+					tr(ng-click="cc.addMaterial(mat)")
+						td {{ mat.nombre }}
+						td {{ mat.descripcion }}
+			hr
 			table.mdl-data-table.mdl-js-data-table
 				thead
 					tr
@@ -29,4 +39,4 @@ div.mdl-grid
 							input(type="number", value="1", ng-model="mat.cant")
 			h5 Total: S/.{{ cc.total() }}
 		div.mdl-card__actions.mdl-card--border
-			a.mdl-button.mdl-js-button.mdl-js-ripple-effect(href="#", ng-click="cc.create_prod()") Crear producto
+			button.mdl-button.mdl-js-button.mdl-js-ripple-effect(ng-click="cc.create_prod()") Crear producto

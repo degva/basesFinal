@@ -40,49 +40,55 @@ div.mdl-grid(ng-controller="buyMatCtrl")
 				input.mdl-textfield__input(type="text", id="src_prove", ng-model="bm.search.descripcion")
 				label.mdl-textfield__label(for="src_prove") Por Descripcion
 			button.mdl-button.mdl-js-button.mdl-js-ripple-effect(ng-click="bm.search.searchProveedor()") Buscar
+			div(ng-show="bm.result")
+				h5 Razon Social: {{ bm.result.razon_social }}
+				h5 Descripcion: {{ bm.result.descripcion }}
+				h5 Ruc: {{ bm.result.ruc }}
+				h5 Telefono: {{ bm.result.telefono }}
+				h5 Correo: {{ bm.result.correo }}
+				h5 Direccion: {{ bm.result.direccion }}
 						
 	div.mdl-card.mdl-cell.mdl-cell--6-col.mdl-cell--12-col-tablet
 		div.mdl-card__title
 			h2.mdl-card__title-text Agregar un proveedor
 		div.mdl-card__supporting-text
 			div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w100
-				input.mdl-textfield__input(type="text", id="raz_soc", ng-model="agp.razon_social")
+				input.mdl-textfield__input(type="text", id="raz_soc", ng-model="agp.dato.razon_social")
 				label.mdl-textfield__label(for="raz_soc") Razon Social
 			br
 			div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w100
-				input.mdl-textfield__input(type="text", id="desc", ng-model="agp.descripcion")
+				input.mdl-textfield__input(type="text", id="desc", ng-model="agp.dato.descripcion")
 				label.mdl-textfield__label(for="desc") Descripcion
 			br
 			div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w100
-				input.mdl-textfield__input(type="number", id="ruc", ng-model="agp.ruc")
+				input.mdl-textfield__input(type="number", id="ruc", ng-model="agp.dato.ruc")
 				label.mdl-textfield__label(for="ruc") RUC
 			br
 			div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w50
-				input.mdl-textfield__input(type="number", id="telf", ng-model="agp.telefono")
+				input.mdl-textfield__input(type="number", id="telf", ng-model="agp.dato.telefono")
 				label.mdl-textfield__label(for="telf") Telefono 1
 			div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w50
-				input.mdl-textfield__input(type="number", id="cel", ng-model="agp.celular")
+				input.mdl-textfield__input(type="number", id="cel", ng-model="agp.dato.celular")
 				label.mdl-textfield__label(for="cel") Celular
 			br
 			div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w100
-				input.mdl-textfield__input(type="email", id="corr", ng-model="agp.correo")
+				input.mdl-textfield__input(type="email", id="corr", ng-model="agp.dato.correo")
 				label.mdl-textfield__label(for="corr") Correo
 			br
 			div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w100
-				input.mdl-textfield__input(type="text", id="direc", ng-model="agp.direccion")
+				input.mdl-textfield__input(type="text", id="direc", ng-model="agp.dato.direccion")
 				label.mdl-textfield__label(for="direc") Direccion
 			button.mdl-button.mdl-js-button.mdl-js-ripple-effect(ng-click="agp.agregarProveedor()") Agregar Proveedor
 
-// TODO :'v
 	div.mdl-card.mdl-cell.mdl-cell--6-col.mdl-cell--12-col-tablet
 		div.mdl-card__title
 			h2.mdl-card__title-text Agregar materiales
 		div.mdl-card__supporting-text
 			div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w100
-				input.mdl-textfield__input(type="text", id="mat_proveedor")
-				label.mdl-textfield__label(for="mat_proveedor") Proveedor
+				input.mdl-textfield__input(type="text", id="mat_proveedor", ng-model="agm.data.prob_id")
+				label.mdl-textfield__label(for="mat_proveedor") Proveedor ID
 			div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w100
-				input.mdl-textfield__input(type="number", id="mat_monto")
+				input.mdl-textfield__input(type="number", id="mat_monto", ng-model="agm.data.monto")
 				label.mdl-textfield__label(for="mat_monto") Monto
 			table.mdl-data-table.mdl-js-data-table
 				thead
@@ -90,11 +96,15 @@ div.mdl-grid(ng-controller="buyMatCtrl")
 						th.mdl-data-table__cell--non-numeric Nombre Material
 						th Cantidad
 						th Precio Unitario
-				tbody
+				tbody(ng-repeat="i in agm.data.items")
 					tr
-						td Botella Azul
-						td 3
-						td 22.1
+						td 
+							input(type="text", ng-model="i.nombre")
+						td 
+							input(type="number", ng-model="i.quantity")
+						td
+							input(type="number", ng-model="i.precio")
+				button(ng-click="agm.addItem()") Agregar Material
 
 		div.mdl-card__actions.mdl-card--border
-			a.mdl-button.mdl-js-button.mdl-js-ripple-effect(href="#") Agregar productos
+			a.mdl-button.mdl-js-button.mdl-js-ripple-effect(href="#",ng-click="agm.agregarMateriales()") Agregar Materiales

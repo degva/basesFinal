@@ -1,7 +1,7 @@
 CREATE OR REPLACE PROCEDURE RegistrarProductosComprados(staff_idIN IN INTEGER, persona_idIN IN INTEGER, totalIN IN INTEGER) IS
 BEGIN
-INSERT INTO compra_productos (persona_id, proveedor_id, total, fecha) 
-VALUES (staff_idIN, persona_idIN, totalIN, SYSDATE);
+	INSERT INTO compra_productos (persona_id, proveedor_id, total, fecha) 
+		VALUES (staff_idIN, persona_idIN, totalIN, SYSDATE);
 END RegistrarProductosComprados
 
 CREATE OR REPLACE PROCEDURE RegigstrarMateriales(material_idIN IN INTEGER, egreso_idIN IN INTEGER, precio_unitarioIN IN FLOAT, cantidadIN IN INTEGER) IS
@@ -9,3 +9,35 @@ BEGIN
 INSERT INTO mate_x_egreso (material_id, egreso_id, precio_unitario, cantidad) 
 VALUES (material_idIN, egreso_idIN, precio_unitarioIN, cantidadIN);
 END RegistrarMateriales;
+
+// para obtener los materiales faltantes
+CREATE OR REPLACE FUNCTION revisar_inventario () RETURNS void IS
+
+BEGIN
+	SELECT M.material_id, M.descripcion, A.nombre, MXA.cantidad
+	FROM Materiales M, Material_x_Almacen MXA, Almacenes 
+	WHERE (A.almacen_id = MXA.almacen_id) 
+	AND (M.material_id = MXA.material_id) 
+	AND (MXA.cantidad < 5);
+
+	UNION
+	SELECT M.material_id, M.descripcion, A.nombre, MXA.cantidad
+	FROM Materiales M, Material_x_Almacen MXA, Almacenes, Lista_Materiales LM
+	WHERE (A.almacen_id=MXA.almacen_id) 
+	AND (M.material_id=MXA.material_id) 
+	AND (M.material_id=LM.material_id) 
+	AND (LM.cantidad<(SELECT SUMA 
+		FROM (SELECT material_id, SUM(cantidad) SUMA
+					FROM Material_x_Almacen
+					GROUP BY material_id)));
+	UNION
+	SELECT M.material_id, M.descripcion, A.nombre, MXA.cantidad
+	FROM Materiales M, Material_x_Almacen MXA, Almacenes, Lista_Materiales LM
+	WHERE (A.almacen_id=MXA.almacen_id) 
+	AND (M.material_id=MXA.material_id) 
+	AND (M.material_id=LM.material_id) 
+	AND (LM.material_id NOT IN (SELECT material_id
+		FROM materiales);
+
+END Revisar_inventario;
+

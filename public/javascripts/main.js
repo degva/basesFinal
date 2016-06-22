@@ -7,7 +7,8 @@ adminFront.config(['$routeProvider', 'uiGmapGoogleMapApiProvider', function($rou
       controller: 'sellProdCtrl'
     })
     .when('/addclient', {
-      templateUrl: 'p/addclient'
+      templateUrl: 'p/addclient',
+			controller: 'addCliCtrl'
     })
     .when('/sellproduct', {
       templateUrl: 'p/sellproduct'
@@ -47,6 +48,30 @@ adminFront.run(function($rootScope){
 		componentHandler.upgradeAllRegistered();
 	});
 });
+
+adminFront.controller('addCliCtrl', ['$scope', '$http',
+	function($scope, $http) {
+		$scope.add = {
+			data: {},
+			addCliente: function() {
+				$http({
+					url: "/api/bases/agregarCliente",
+					method: "POST",
+					data: JSON.stringify($scope.add.data),
+					headers: {'Content-Type': 'application/json'}
+				})
+				.success(function(data, status, headers, config) {
+					if (status == 200) {
+						alert('Cliente insertado!');
+						$scope.add.data = {};
+					} else {
+						alert('Error papu :\'v');
+					}
+				})
+			}
+		};
+	}
+]);
 
 adminFront.controller('sellProdCtrl', ['$scope', '$http',
   function($scope, $http) {	
@@ -97,23 +122,72 @@ adminFront.controller('buyMatCtrl', ['$scope', '$http',
   function($scope, $http) {
 		$scope.bm = {
 			mat_req: [
-				{id: 222, nombre: 'material 1', can_act: 2, can_nece: 5},
-				{id: 342, nombre: 'material 2', can_act: 3, can_nece: 8},
-				{id: 876, nombre: 'material 3', can_act: 0, can_nece: 2}
 			],
 			search: {
 				searchProveedor: function() {
-					console.log('Helo' + $scope.bm.search.id);		
-					console.log('Helo' + $scope.bm.search.nombre);		
-					console.log('Helo' + $scope.bm.search.descripcion);		
+					$http({
+						url: '/api/bases/buscarProveedor',
+						method: 'post',
+						data: JSON.stringify($scope.bm.search),
+						headers: {'Content-Type': 'application/json'}
+					})
+					.success(function(data, status, headers, config) {
+						if (status == 200) {
+							alert('Proveedor encontrado!');
+							$scope.bm.result = data;
+						}
+					})
+					.error(function(data, status, headers, config) {
+						alert('no se encontro a nadie');
+						$scope.bm.search = {};
+					});
 				}
 			}
 		};
 		$scope.agp = {
 			agregarProveedor: function() {
-				console.log($scope.agp.correo);
+				$http({
+					url: '/api/bases/agregarProveedor',
+					method: 'post',
+					data: JSON.stringify($scope.agp.dato),
+					headers: {'Content-Type': 'application/json'}
+				})
+				.success(function(data, status, headers, config) {
+					if (status == 200) {
+						alert('Proveedor Agregado!');
+						$scope.agp.dato = {};
+					}
+				})
+				.error(function(data, status, headers, config) {
+					alert('Hubo un error...');
+				});
 			}
 		};
+
+		$scope.agm = {
+			data : {
+				items : []
+			},
+			addItem: function() {
+				$scope.agm.data.items.push({nombre: 'material', quantity: '0', precio: '0'});
+			},
+			agregarMateriales: function() {
+				// TODO
+			}
+		};
+		$http({
+			url: "/api/bases/getMatFaltantes",
+			method: "GET",
+			headers: {'Content-Type': 'application/json'}
+		})
+		.success(function(data, status, headers, config) {
+			if (status == 200) {
+				console.log(data);
+				$scope.bm.mat_req = data;
+			} else {
+				alert('Error papu :\'v');
+			}
+		});
 	}
 ]);
 
@@ -121,22 +195,50 @@ adminFront.controller('createCtrl', ['$scope', '$http',
 	function($scope, $http) {
 		$scope.cc = {
 			materiales : [
-				{id: 234, nombre: "helas", cant: 34, precio: 34.33}
 			],
 			buscar : function() {
 				var str = $scope.cc.material_busc;
-				// mandar str to API
-				console.log("Tu asume no mas: " + str);
+				$http({
+					url: '/api/bases/buscarMaterial',
+					method: 'post',
+					data: JSON.stringify({val: str}),
+					headers: {'Content-Type': 'application/json'}
+				})
+				.success(function(data, status, headers, config) {
+					$scope.cc.resultados = data;
+				});
+			},
+			addMaterial: function(mat) {
+				mat.cant = 0;
+				$scope.cc.materiales.push(mat);
 			},
 			total: function() {
 				var a = 0;
 				$scope.cc.materiales.forEach(function(i) {
-					a += i.cant * i.precio;
+					a += i.cant * i.precio_unitario;
 				});
 				return (a * 1.55).toFixed(2);
 			},
 			create_prod: function() {
 				// toma todas las variables y las manda por API
+				$http({
+					url: '/api/bases/material',
+					method: 'post',
+					data: JSON.stringify({
+						nombre: $scope.cc.nombre,
+						descripcion: $scope.cc.descripcion,
+						materiales: $scope.cc.materiales,
+						precio: $scope.cc.total()
+					}),
+					headers: {'Content-Type': 'application/json'}
+				})
+				.success(function(data, status, headers, config) {
+					alert('producto Creado!');
+					$scope.cc.nombre= "";
+					$scope.cc.descripcion = "";
+					$scope.cc.materiales = [];
+					$scope.cc.resultados = [];
+				});
 			}
 		};
 	}
