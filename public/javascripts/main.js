@@ -4,7 +4,7 @@ adminFront.config(['$routeProvider', 'uiGmapGoogleMapApiProvider', function($rou
   $routeProvider.
     when('/', {
       templateUrl: 'p/sellproduct',
-      controller: 'mainCtrl'
+      controller: 'sellProdCtrl'
     })
     .when('/addclient', {
       templateUrl: 'p/addclient'
@@ -13,7 +13,8 @@ adminFront.config(['$routeProvider', 'uiGmapGoogleMapApiProvider', function($rou
       templateUrl: 'p/sellproduct'
     })
     .when('/deliver', {
-      templateUrl: 'p/deliver'
+      templateUrl: 'p/deliver',
+			controller: 'deliverCtrl'
     })
     .when('/subsidios', {
       templateUrl: 'p/subsidios',
@@ -44,10 +45,43 @@ adminFront.run(function($rootScope){
 	});
 });
 
-adminFront.controller('mainCtrl', ['$scope', '$http',
-  function($scope, $http) {
-		console.log("inside main ctrl!");
+adminFront.controller('sellProdCtrl', ['$scope', '$http',
+  function($scope, $http) {	
+		$scope.vp = {
+			cliente: "",
+			cliente_id: -1,
+			productos: [
+				{id: 001, nombre: "Producto A", cantidad: 1, precio: 23.21},
+				{id: 002, nombre: "Producto B", cantidad: 1, precio: 123.1},
+				{id: 003, nombre: "Producto C", cantidad: 1, precio: 442.2}
+			],
+			factura: 1,
+			subtotal: function() {
+				a = 0;
+				$scope.vp.productos.forEach(function(i) {
+					a += i.cantidad * i.precio;
+				});
+				return a;
+			},
+			igv: function() {
+				if ($scope.vp.factura == 1) {
+					return $scope.vp.subtotal() * 0.18;
+				} else {
+					return 0;
+				}
+			},
+			buscarCliente: function() {
+				// buscar con el API a
+				//  /api/bases/obtenerCliente
+				console.log("The name is: " + $scope.vp.cliente );
+			}
+		};
   }
+]);
+
+adminFront.controller('sellProdCtrl', ['$scope', '$http',
+  function($scope, $http) {	
+	}
 ]);
 
 adminFront.controller('subsiCtrl', ['$scope', '$http', 'uiGmapGoogleMapApi',

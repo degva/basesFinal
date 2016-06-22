@@ -45,42 +45,27 @@ CREATE TABLE public.material_x_almacen (
 );
 
 
-CREATE SEQUENCE public.persona_id_seq_1;
+CREATE SEQUENCE public.personas_persona_id_seq;
 
-CREATE TABLE public.Staff (
-                persona_id INTEGER NOT NULL DEFAULT nextval('public.persona_id_seq_1'),
-                sueldo NUMERIC(4) NOT NULL,
-                fecha_ingreso TIMESTAMP NOT NULL,
-                CONSTRAINT staff_pk PRIMARY KEY (persona_id)
+CREATE TABLE public.Personas (
+                persona_id INTEGER NOT NULL DEFAULT nextval('public.personas_persona_id_seq'),
+                nombre VARCHAR NOT NULL,
+                apellido VARCHAR NOT NULL,
+                telefono VARCHAR NOT NULL,
+                direccion VARCHAR NOT NULL,
+                CONSTRAINT personas_pk PRIMARY KEY (persona_id)
 );
 
 
-ALTER SEQUENCE public.persona_id_seq_1 OWNED BY public.Staff.persona_id;
-
-CREATE SEQUENCE public.main_egreso_id_seq_1;
-
-CREATE TABLE public.pago_stafff (
-                egreso_id INTEGER NOT NULL DEFAULT nextval('public.main_egreso_id_seq_1'),
-                persona_id INTEGER NOT NULL,
-                staff_id INTEGER NOT NULL,
-                fecha_pago TIMESTAMP,
-                CONSTRAINT pago_stafff_pk PRIMARY KEY (egreso_id)
-);
-
-
-ALTER SEQUENCE public.main_egreso_id_seq_1 OWNED BY public.pago_stafff.egreso_id;
-
-CREATE SEQUENCE public.persona_id_seq;
+ALTER SEQUENCE public.personas_persona_id_seq OWNED BY public.Personas.persona_id;
 
 CREATE TABLE public.Clientes (
-                persona_id INTEGER NOT NULL DEFAULT nextval('public.persona_id_seq'),
+                persona_id INTEGER NOT NULL,
                 RUC VARCHAR NOT NULL,
                 razon_social VARCHAR NOT NULL,
                 CONSTRAINT clientes_pk PRIMARY KEY (persona_id)
 );
 
-
-ALTER SEQUENCE public.persona_id_seq OWNED BY public.Clientes.persona_id;
 
 CREATE SEQUENCE public.subsidios_subsidiario_id_seq;
 
@@ -95,6 +80,27 @@ CREATE TABLE public.Subsidios (
 
 
 ALTER SEQUENCE public.subsidios_subsidiario_id_seq OWNED BY public.Subsidios.subsidio_id;
+
+CREATE TABLE public.Staff (
+                persona_id INTEGER NOT NULL,
+                sueldo NUMERIC(4) NOT NULL,
+                fecha_ingreso TIMESTAMP NOT NULL,
+                CONSTRAINT staff_pk PRIMARY KEY (persona_id)
+);
+
+
+CREATE SEQUENCE public.main_egreso_id_seq_1;
+
+CREATE TABLE public.pago_stafff (
+                egreso_id INTEGER NOT NULL DEFAULT nextval('public.main_egreso_id_seq_1'),
+                persona_id INTEGER NOT NULL,
+                staff_id INTEGER NOT NULL,
+                fecha_pago TIMESTAMP,
+                CONSTRAINT pago_stafff_pk PRIMARY KEY (egreso_id)
+);
+
+
+ALTER SEQUENCE public.main_egreso_id_seq_1 OWNED BY public.pago_stafff.egreso_id;
 
 CREATE SEQUENCE public.ingresos_venta_id_seq;
 
@@ -120,16 +126,6 @@ CREATE TABLE public.boleta_x_estado (
                 estado_id INTEGER NOT NULL,
                 fecha TIMESTAMP NOT NULL,
                 CONSTRAINT boleta_x_estado_pk PRIMARY KEY (boleta_id, estado_id, fecha)
-);
-
-
-CREATE TABLE public.Personas (
-                persona_id INTEGER NOT NULL,
-                nombre VARCHAR NOT NULL,
-                apellido VARCHAR NOT NULL,
-                telefono VARCHAR NOT NULL,
-                direccion VARCHAR NOT NULL,
-                CONSTRAINT personas_pk PRIMARY KEY (persona_id)
 );
 
 
@@ -266,9 +262,37 @@ ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
-ALTER TABLE public.Personas ADD CONSTRAINT staff_personas_fk
+ALTER TABLE public.Staff ADD CONSTRAINT personas_staff_fk
 FOREIGN KEY (persona_id)
-REFERENCES public.Staff (persona_id)
+REFERENCES public.Personas (persona_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.Clientes ADD CONSTRAINT personas_clientes_fk
+FOREIGN KEY (persona_id)
+REFERENCES public.Personas (persona_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.Subsidios ADD CONSTRAINT clientes_subsidios_fk
+FOREIGN KEY (cliente_id)
+REFERENCES public.Clientes (persona_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.boleta ADD CONSTRAINT clientes_ingresos_fk
+FOREIGN KEY (cliente_id)
+REFERENCES public.Clientes (persona_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.boleta ADD CONSTRAINT subsidiarios_ingresos_fk
+FOREIGN KEY (subsidio_id)
+REFERENCES public.Subsidios (subsidio_id)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
@@ -304,34 +328,6 @@ NOT DEFERRABLE;
 ALTER TABLE public.compra_productos ADD CONSTRAINT staff_compra_productos_fk
 FOREIGN KEY (persona_id)
 REFERENCES public.Staff (persona_id)
-ON DELETE NO ACTION
-ON UPDATE NO ACTION
-NOT DEFERRABLE;
-
-ALTER TABLE public.Subsidios ADD CONSTRAINT clientes_subsidios_fk
-FOREIGN KEY (cliente_id)
-REFERENCES public.Clientes (persona_id)
-ON DELETE NO ACTION
-ON UPDATE NO ACTION
-NOT DEFERRABLE;
-
-ALTER TABLE public.boleta ADD CONSTRAINT clientes_ingresos_fk
-FOREIGN KEY (cliente_id)
-REFERENCES public.Clientes (persona_id)
-ON DELETE NO ACTION
-ON UPDATE NO ACTION
-NOT DEFERRABLE;
-
-ALTER TABLE public.Personas ADD CONSTRAINT clientes_personas_fk
-FOREIGN KEY (persona_id)
-REFERENCES public.Clientes (persona_id)
-ON DELETE NO ACTION
-ON UPDATE NO ACTION
-NOT DEFERRABLE;
-
-ALTER TABLE public.boleta ADD CONSTRAINT subsidiarios_ingresos_fk
-FOREIGN KEY (subsidio_id)
-REFERENCES public.Subsidios (subsidio_id)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;

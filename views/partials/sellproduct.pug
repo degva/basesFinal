@@ -1,4 +1,4 @@
-div.mdl-grid
+div.mdl-grid(ng-controller="sellProdCtrl")
 
 	// Card for courses to be published
 
@@ -7,47 +7,41 @@ div.mdl-grid
 			h2.mdl-card__title-text Venta de producto
 		div.mdl-card__supporting-text
 			div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w100
-				input.mdl-textfield__input(type="text", id="ven_nombre")
-				label.mdl-textfield__label(for="ven_nombre") Nombre Cliente
-			button.mdl-button.mdl-js-button.mdl-js-ripple-effect Buscar
+				input.mdl-textfield__input(type="text", id="ven_nombre", ng-model="vp.cliente")
+				label.mdl-textfield__label(for="ven_nombre") Nombre Cliente		
+			button.mdl-button.mdl-js-button.mdl-js-ripple-effect(ng-click="vp.buscarCliente()") Buscar
 			br
 
 			label.mdl-radio.mdl-js-radio.mdl-js-ripple-effect(for="factura")
-				input.mdl-radio__button(type="radio", id="factura", name="tipo_opt")
+				input.mdl-radio__button(type="radio", id="factura", name="tipo_opt", ng-model="vp.factura", value="1")
 				span.mdl-radio__label Factura
 			br
 			label.mdl-radio.mdl-js-radio.mdl-js-ripple-effect(for="boleta")
-				input.mdl-radio__button(type="radio", id="boleta", name="tipo_opt")
+				input.mdl-radio__button(type="radio", id="boleta", name="tipo_opt", ng-model="vp.factura", value="0")
 				span.mdl-radio__label Boleta
 
 			div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w100
 				input.mdl-textfield__input(type="text", id="ven_prod")
 				label.mdl-textfield__label(for="ven_prod") Producto
 			button.mdl-button.mdl-js-button.mdl-js-ripple-effect Agregar
-			table.mdl-data-table.mdl-js-data-table
+			table.mdl-data-table.mdl-js-data-table()
 				thead
 					tr
 						th ID
 						th.mdl-data-table__cell--non-numeric Nombre Producto
 						th Cantidad
 						th Precio unitario
-				tbody
+				tbody(ng-repeat="item in vp.productos")
 					tr
-						td 001
-						td Botella Azul
+						td {{ item.id }}
+						td {{ item.nombre }}
 						td
-							input(type="number", value="1")
-						td 12.10
-					tr
-						td 002
-						td Vidrio Plano
-						td
-							input(type="number", value="1")
-						td 32.32
-			h5 Subtotal: S/.1232.23
+							input(type="number", value="1", ng-model="item.cantidad")
+						td {{ item.precio }}
+			h5 Subtotal: S/.{{ vp.subtotal() }}
+			br(ng-show="vp.factura == 1")
+			h5(ng-show="vp.factura == 1") IGV: S/.{{ vp.igv() }}
 			br
-			h5 IGV: S/.32.12
-			br
-			h5 Total: S/.232.23
+			h5 Total: S/.{{ vp.subtotal() + vp.igv() }}
 		div.mdl-card__actions.mdl-card--border
 			a.mdl-button.mdl-js-button.mdl-js-ripple-effect(href="#") Imprimir Boleta

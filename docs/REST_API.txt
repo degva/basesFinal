@@ -26,5 +26,10 @@
 	+ /api/bases/revisarInventario
 	+ /api/bases/registrarMaterial
 
-+
-	
+# - CREATE
+	+ /api/bases/material
+
+# - STAFF PAY
+	+ /api/bases/getStaff
+	+ /api/bases/getDetalled
+	+ /api/bases/pagarStaff/:id

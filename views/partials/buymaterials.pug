@@ -78,3 +78,32 @@ div.mdl-grid
 					input.mdl-textfield__input(type="text", id="direc")
 					label.mdl-textfield__label(for="direc") Direccion
 				button.mdl-button.mdl-js-button.mdl-js-ripple-effect Agregar Proveedor
+	
+	div.mdl-card.mdl-cell.mdl-cell--6-col.mdl-cell--12-col-tablet
+		div.mdl-card__title
+			h2.mdl-card__title-text Agregar materiales
+		div.mdl-card__supporting-text
+			div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w100
+				input.mdl-textfield__input(type="text", id="mat_proveedor")
+				label.mdl-textfield__label(for="mat_proveedor") Proveedor
+			div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w100
+				input.mdl-textfield__input(type="number", id="mat_monto")
+				label.mdl-textfield__label(for="mat_monto") Monto
+			table.mdl-data-table.mdl-js-data-table
+				thead
+					tr
+						th.mdl-data-table__cell--non-numeric Nombre Material
+						th Cantidad
+						th Precio Unitario
+				tbody
+					tr
+						td Botella Azul
+						td 3
+						td 22.1
+					tr
+						td Vidrio Plano
+						td 2
+						td 34.22
+
+		div.mdl-card__actions.mdl-card--border
+			a.mdl-button.mdl-js-button.mdl-js-ripple-effect(href="#") Agregar productos
