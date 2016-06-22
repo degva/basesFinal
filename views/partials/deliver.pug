@@ -1,4 +1,4 @@
-div.mdl-grid
+div.mdl-grid(ng-controller="sellProdCtrl")
 
 	// See all orders
 	div.mdl-card.mdl-cell.mdl-cell--6-col
@@ -11,15 +11,11 @@ div.mdl-grid
 						th Numero de Boleta
 						th.mdl-data-table__cell--non-numeric Cliente
 						th.mdl-data-table__cell--non-numeric Estado
-				tbody
+				tbody(ng-repeat="vp in sp.venta_procesos")
 					tr
-						td 4232622
-						td Funanito de tal
-						td En proceso
-					tr
-						td 4232622
-						td Funanito de tal
-						td Para ser enviado
+						td {{ vp.num }}
+						td {{ vp.cliente }}
+						td {{ vp.estado }}
 
 	div.mdl-card.mdl-cell.mdl-cell--6-col
 		div.mdl-card__title

@@ -1,4 +1,4 @@
-div.mdl-grid
+div.mdl-grid(ng-controller="buyMatCtrl")
 
 	// Card for Courses 
 	div.mdl-card.mdl-cell.mdl-cell--6-col.mdl-cell--12-col-tablet
@@ -12,17 +12,12 @@ div.mdl-grid
 						th.mdl-data-table__cell--non-numeric Nombre Material
 						th Cantidad Actual
 						th Cantidad Necesaria
-				tbody
+				tbody(ng-repeat="p in bm.mat_req")
 					tr
-						td 001
-						td Botella Azul
-						td 3
-						td 6
-					tr
-						td 002
-						td Vidrio Plano
-						td 0
-						td 8
+						td {{ p.id }}
+						td {{ p.nombre }}
+						td {{ p.can_act }}
+						td {{ p.can_nece }}  
 
 		div.mdl-card__actions.mdl-card--border
 			a.mdl-button.mdl-js-button.mdl-js-ripple-effect(href="#") Imprimir Lista
@@ -36,48 +31,47 @@ div.mdl-grid
 			h2.mdl-card__title-text Buscar proveedor
 		div.mdl-card__supporting-text
 			div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w100
-				input.mdl-textfield__input(type="text", id="src_prove")
+				input.mdl-textfield__input(type="text", id="src_prove", ng-model="bm.search.id")
 				label.mdl-textfield__label(for="src_prove") Por ID
 			div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w100
-				input.mdl-textfield__input(type="text", id="src_prove")
+				input.mdl-textfield__input(type="text", id="src_prove", ng-model="bm.search.nombre")
 				label.mdl-textfield__label(for="src_prove") Por Nombre
 			div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w100
-				input.mdl-textfield__input(type="text", id="src_prove")
+				input.mdl-textfield__input(type="text", id="src_prove", ng-model="bm.search.descripcion")
 				label.mdl-textfield__label(for="src_prove") Por Descripcion
-			button.mdl-button.mdl-js-button.mdl-js-ripple-effect Buscar
+			button.mdl-button.mdl-js-button.mdl-js-ripple-effect(ng-click="bm.search.searchProveedor()") Buscar
 						
 	div.mdl-card.mdl-cell.mdl-cell--6-col.mdl-cell--12-col-tablet
 		div.mdl-card__title
 			h2.mdl-card__title-text Agregar un proveedor
 		div.mdl-card__supporting-text
-			form(action='#')
-				div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w100
-					input.mdl-textfield__input(type="text", id="raz_soc")
-					label.mdl-textfield__label(for="raz_soc") Razon Social
-				br
-				div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w100
-					input.mdl-textfield__input(type="text", id="desc")
-					label.mdl-textfield__label(for="desc") Descripcion
-				br
-				div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w100
-					input.mdl-textfield__input(type="number", id="ruc")
-					label.mdl-textfield__label(for="ruc") RUC
-				br
-				div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w50
-					input.mdl-textfield__input(type="number", id="telf")
-					label.mdl-textfield__label(for="telf") Telefono 1
-				div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w50
-					input.mdl-textfield__input(type="number", id="cel")
-					label.mdl-textfield__label(for="cel") Celular
-				br
-				div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w100
-					input.mdl-textfield__input(type="email", id="corr")
-					label.mdl-textfield__label(for="corr") Correo
-				br
-				div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w100
-					input.mdl-textfield__input(type="text", id="direc")
-					label.mdl-textfield__label(for="direc") Direccion
-				button.mdl-button.mdl-js-button.mdl-js-ripple-effect Agregar Proveedor
+			div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w100
+				input.mdl-textfield__input(type="text", id="raz_soc", ng-model="agp.razon_social")
+				label.mdl-textfield__label(for="raz_soc") Razon Social
+			br
+			div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w100
+				input.mdl-textfield__input(type="text", id="desc", ng-model="agp.descripcion")
+				label.mdl-textfield__label(for="desc") Descripcion
+			br
+			div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w100
+				input.mdl-textfield__input(type="number", id="ruc", ng-model="agp.ruc")
+				label.mdl-textfield__label(for="ruc") RUC
+			br
+			div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w50
+				input.mdl-textfield__input(type="number", id="telf", ng-model="agp.telefono")
+				label.mdl-textfield__label(for="telf") Telefono 1
+			div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w50
+				input.mdl-textfield__input(type="number", id="cel", ng-model="agp.celular")
+				label.mdl-textfield__label(for="cel") Celular
+			br
+			div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w100
+				input.mdl-textfield__input(type="email", id="corr", ng-model="agp.correo")
+				label.mdl-textfield__label(for="corr") Correo
+			br
+			div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w100
+				input.mdl-textfield__input(type="text", id="direc", ng-model="agp.direccion")
+				label.mdl-textfield__label(for="direc") Direccion
+			button.mdl-button.mdl-js-button.mdl-js-ripple-effect(ng-click="agp.agregarProveedor()") Agregar Proveedor
 	
 	div.mdl-card.mdl-cell.mdl-cell--6-col.mdl-cell--12-col-tablet
 		div.mdl-card__title

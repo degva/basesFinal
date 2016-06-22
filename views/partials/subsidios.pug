@@ -13,15 +13,11 @@ div.mdl-grid(ng-controller='subsiCtrl')
 						th.mdl-data-table__cell--non-numeric Nombre
 						th.mdl-data-table__cell--non-numeric Apellido
 						th Celular
-				tbody
-					tr
-						td Pepito
-						td de los Palotes
-						td 323534554
-					tr
-						td jhon
-						td snow
-						td 234522456
+				tbody(ng-repeat="p in sub.clientes")
+					tr(ng-click="sub.takeCliente(p.id)")
+						td {{ p.nombre }}
+						td {{ p.apellido }}
+						td {{ p.telefono }}
 
 	// -- End of card for courses
 
@@ -55,4 +51,4 @@ div.mdl-grid(ng-controller='subsiCtrl')
 						ui-gmap-marker(coords="marker.coords", options="marker.options", events="marker.events", idkey="marker.id")
 
 		div.mdl-card__actions.mdl-card--border
-			a.mdl-button.mdl-js-button.mdl-js-ripple-effect(href="#") Agregar Subsidio
+			a.mdl-button.mdl-js-button.mdl-js-ripple-effect(ng-click="sub.addSubsidio()") Agregar Subsidio

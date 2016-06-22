@@ -21,7 +21,8 @@ adminFront.config(['$routeProvider', 'uiGmapGoogleMapApiProvider', function($rou
 			controller: 'subsiCtrl'
     })
     .when('/buymaterials', {
-      templateUrl: 'p/buymaterials'
+      templateUrl: 'p/buymaterials',
+			controller: 'buyMatCtrl'
     })
     .when('/create', {
       templateUrl: 'p/create'
@@ -79,13 +80,46 @@ adminFront.controller('sellProdCtrl', ['$scope', '$http',
   }
 ]);
 
-adminFront.controller('sellProdCtrl', ['$scope', '$http',
-  function($scope, $http) {	
+adminFront.controller('deliverCtrl', ['$scope', '$http',
+  function($scope, $http) {
+		$scope.sp = {
+			venta_procesos: [
+				{num: 232345,cliente: "ste men 1", estado: "En proceso"},
+				{num: 454831,cliente: "ste men 2", estado: "Para ser enviado"}
+			]
+		}
+	}
+]);
+
+adminFront.controller('buyMatCtrl', ['$scope', '$http',
+  function($scope, $http) {
+		$scope.bm = {
+			mat_req: [
+				{id: 222, nombre: 'material 1', can_act: 2, can_nece: 5},
+				{id: 342, nombre: 'material 2', can_act: 3, can_nece: 8},
+				{id: 876, nombre: 'material 3', can_act: 0, can_nece: 2}
+			],
+			search: {
+				searchProveedor: function() {
+					console.log('Helo' + $scope.bm.search.id);		
+					console.log('Helo' + $scope.bm.search.nombre);		
+					console.log('Helo' + $scope.bm.search.descripcion);		
+				}
+			}
+		};
+		$scope.agp = {
+			agregarProveedor: function() {
+				console.log($scope.agp.correo);
+			}
+		};
 	}
 ]);
 
 adminFront.controller('subsiCtrl', ['$scope', '$http', 'uiGmapGoogleMapApi',
 	function( $scope, $http, uiGmapGoogleMapApi) {
+
+		// no tocar todo este bloque :'v
+		// -------------------------------------------------------------------------------
 		$scope.map = { center: { latitude: -12.072668, longitude: -77.079427 }, zoom: 15 };
 		$scope.options = {scrollwheel:  true};
 		$scope.marker = {
@@ -111,5 +145,22 @@ adminFront.controller('subsiCtrl', ['$scope', '$http', 'uiGmapGoogleMapApi',
 		};
 		uiGmapGoogleMapApi.then(function(maps) {
 		});
+		// -------------------------------------------------------------------------------
+		
+		$scope.sub = {
+			clientes : [
+				{id: 1, nombre: 'Pepito', apellido: 'de los Palotes', telefono: 23452345},
+				{id: 2, nombre: 'Jhon', apellido: 'Snow', telefono: 293485}
+			],
+			takeCliente: function(id) {
+				console.log("Taken: " + id);
+			},
+			addSubsidio: function() {
+				var lat = $scope.marker.coords.latitude;
+				var lon = $scope.marker.coords.longitude;
+				console.log("Latitud: " + lat);
+				console.log("Longitud: " + lon);
+			}
+		};
 	}
 ]);
