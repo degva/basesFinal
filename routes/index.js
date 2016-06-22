@@ -28,5 +28,8 @@ router.post('/api/bases/buscarMaterial', api.buscarMaterial);
 router.post('/api/bases/material', api.crearMaterial);
 
 // venta del producto
+router.post('/api/bases/buscarCliente', api.buscarCliente);
+router.post('/api/bases/buscarProducto', api.buscarProducto);
+router.post('/api/bases/agregarVenta', api.agregarVenta);'
 
 module.exports = router;

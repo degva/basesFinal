@@ -79,9 +79,7 @@ adminFront.controller('sellProdCtrl', ['$scope', '$http',
 			cliente: "",
 			cliente_id: -1,
 			productos: [
-				{id: 001, nombre: "Producto A", cantidad: 1, precio: 23.21},
-				{id: 002, nombre: "Producto B", cantidad: 1, precio: 123.1},
-				{id: 003, nombre: "Producto C", cantidad: 1, precio: 442.2}
+				//{id: 003, nombre: "Producto C", cantidad: 1, precio: 442.2}
 			],
 			factura: 1,
 			subtotal: function() {
@@ -100,9 +98,76 @@ adminFront.controller('sellProdCtrl', ['$scope', '$http',
 			},
 			buscarCliente: function() {
 				// buscar con el API a
-				//  /api/bases/obtenerCliente
-				console.log("The name is: " + $scope.vp.cliente );
+				$http({
+					url: '/api/bases/buscarCliente',
+					method: 'post',
+					data: JSON.stringify({
+						dato: $scope.vp.cliente
+					}),
+					headers: {'Content-Type': 'application/json'}
+				})
+				.success(function(data) {
+					$scope.vp.cliente_resultado = data;
+				})
+				.error(function(err) {
+					alert('algo paso');
+					console.log(err);
+				});
+			},
+			tomaCliente: function(item) {
+				$scope.vp.cliente_id = item.id;
+				$scope.vp.cliente = item.nombre + ' ' + item.apellido;
+				$scope.vp.cliente_resultado = [];
+			},
+
+			buscaProducto: function() {
+				$http({
+					url: '/api/bases/buscarProducto',
+					method: 'post',
+					data: JSON.stringify({
+						dato: $scope.vp.prod_busqueda
+					}),
+					headers: {'Content-Type': 'application/json'}
+				})
+				.success(function(data) {
+					$scope.vp.producto_resultado = data;
+				})
+				.error(function(err) {
+					alert('algo paso');
+					console.log(err);
+				});
+			},
+			tomaProducto: function(item) {
+				$scope.vp.productos.push(item);
+				$scope.vp.prod_busqueda = "";
+				$scope.vp.producto_restulado = [];
+			},
+
+			concretarVenta: function() {
+
+				$http({
+					url: '/api/bases/agregarVenta',
+					method: 'post',
+					data: JSON.stringify({
+						cliente_id: $scope.vp.cliente_id,
+						productos: $scope.vp.productos,
+						factura: $scope.vp.factura,
+						staff_id: 1,
+						subtotal: $scope.vp.subtotal(),
+						igv: $scope.vp.igv()
+					}),
+					headers: {'Content-Type': 'application/json'}
+				})
+				.success(function(data) {
+					$scope.vp.producto_resultado = data;
+				})
+				.error(function(err) {
+					alert('algo paso');
+					console.log(err);
+				});
+				
 			}
+
 		};
   }
 ]);

@@ -32,8 +32,6 @@ var api = {
 				console.log(error);
 				res.sendStatus(400);
 			});
-			// si quiero enviar un json
-			// res.json(data);
 	},
 	agregarProveedor: function(req, res) {
 		var razon_social = req.body.razon_social ;
@@ -134,8 +132,58 @@ var api = {
 				console.log(error);
 				res.sendStatus(404);
 			});
+	},
 
+	// -- para venta de productos
+	buscarCliente: function(req, res) {
+		var val = req.body.dato;
+		var db = pgp(pgCn);
+		db.any("select * from buscar_cliente ($1)", [val])
+			.then(function(data) {
+				res.json(data);
+			})
+			.catch(function(error) {
+				console.log(error);
+				res.sendStatus(404);
+			});
+	},
+	buscarProducto: function(req, res) {
+		var val = req.body.dato;
+		var db = pgp(pgCn);
+		db.any("select * from buscar_producto ($1)", [val])
+			.then(function(data) {
+				res.json(data);
+			})
+			.catch(function(error) {
+				console.log(error);
+				res.sendStatus(404);
+			});
+	},
+	agregarVenta: function(req, res) {
+		var cliente_id = req.body.cliente_id;
+		var productos = req.body.productos;
+		var factura = req.body.factura;
+		var staff_id = req.body.staff_id;
+		var subtotal = req.body.subtotal;
+		var igv = req.body.igv;
 
+		var db = pgp(pgCn);
+		
+		var query = "select agregar_venta (precio_total,cliente_id, factura, fecha, staff_id) values ($1, $2, $3, $4, $5, $6)";
+		if (factura) {
+			precio_total = subtotal + igv;
+		} else {
+			precio_total = subtotal;
+		}
+
+		db.one(query, [precio_total, cliente_id, factura, now(), staff_id])
+			.then(function(data) {
+				alert('se agrego el producto!');
+			})
+			.catch(function(error) {
+				console.log(error);
+				res.sendStatus(404);
+			});
 	}
 };
 

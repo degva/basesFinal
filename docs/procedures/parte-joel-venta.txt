@@ -1,3 +1,31 @@
+CREATE OR REPLACE FUNCTION buscar_cliente (rellenar_material VARCHAR)
+	RETURNS TABLE (id integer, nombre varchar, apellido varchar) AS
+$$
+BEGIN
+	RETURN QUERY 
+		select p.persona_id, p.nombre, p.apellido
+			from personas p
+			where p.persona_id in (select	c.persona_id from clientes c) and
+				p.nombre LIKE rellenar_material || '%';
+END;
+$$
+LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE FUNCTION buscar_producto (rellenar_material VARCHAR)
+	RETURNS TABLE (id integer, nombre varchar, descripcion varchar, precio_unitario real) AS
+$$
+BEGIN
+	RETURN QUERY 
+		select p.producto_id, p.nombre, p.descripcion, p.precio
+			from productos p
+			where p.nombre LIKE rellenar_material || '%';
+END;
+$$
+LANGUAGE plpgsql;
+
+
+// ---------------------
 CREATE OR REPLACE PROCEDURE venta(
     cliente IN INTEGER,
     preciot IN NUMERIC,

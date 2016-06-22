@@ -11,7 +11,17 @@ div.mdl-grid(ng-controller="sellProdCtrl")
 				label.mdl-textfield__label(for="ven_nombre") Nombre Cliente		
 			button.mdl-button.mdl-js-button.mdl-js-ripple-effect(ng-click="vp.buscarCliente()") Buscar
 			br
+			table.mdl-data-table.mdl-js-data-table(ng-show="vp.cliente_resultado")
+				thead
+					tr
+						th.mdl-data-table__cell--non-numeric Nombre
+						th.mdl-data-table__cell--non-numeric Apellido
+				tbody(ng-repeat="item in vp.cliente_resultado")
+					tr(ng-click="vp.tomaCliente(item)")
+						td {{ item.nombre }}
+						td {{ item.apellido }}
 
+			hr
 			label.mdl-radio.mdl-js-radio.mdl-js-ripple-effect(for="factura")
 				input.mdl-radio__button(type="radio", id="factura", name="tipo_opt", ng-model="vp.factura", value="1")
 				span.mdl-radio__label Factura
@@ -21,9 +31,20 @@ div.mdl-grid(ng-controller="sellProdCtrl")
 				span.mdl-radio__label Boleta
 
 			div.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label.w100
-				input.mdl-textfield__input(type="text", id="ven_prod")
+				input.mdl-textfield__input(type="text", id="ven_prod", ng-model="vp.prod_busqueda")
 				label.mdl-textfield__label(for="ven_prod") Producto
-			button.mdl-button.mdl-js-button.mdl-js-ripple-effect Agregar
+			button.mdl-button.mdl-js-button.mdl-js-ripple-effect(ng-click="vp.buscarProducto()") Buscar
+			br
+			table.mdl-data-table.mdl-js-data-table(ng-show="vp.cliente_resultado")
+				thead
+					tr
+						th.mdl-data-table__cell--non-numeric Nombre
+						th.mdl-data-table__cell--non-numeric Apellido
+				tbody(ng-repeat="item in vp.producto_resultado")
+					tr(ng-click="vp.tomaProducto(item)")
+						td {{ item.nombre }}
+						td {{ item.apellido }}
+			hr
 			table.mdl-data-table.mdl-js-data-table()
 				thead
 					tr
@@ -44,4 +65,4 @@ div.mdl-grid(ng-controller="sellProdCtrl")
 			br
 			h5 Total: S/.{{ (vp.subtotal() + vp.igv()).toFixed(2) }}
 		div.mdl-card__actions.mdl-card--border
-			a.mdl-button.mdl-js-button.mdl-js-ripple-effect(href="#") Imprimir Boleta
+			button.mdl-button.mdl-js-button.mdl-js-ripple-effect(ng-click="vp.concretarVenta()") Imprimir Boleta
